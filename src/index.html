@@ -1,80 +1,79 @@
 <!doctype html>
 <html ng-app="rrrEmil">
-  <head>
-    <meta charset="utf-8">
-    <title>rrrEmil</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <head>
+        <meta charset="utf-8">
+        <title>Russian Railroads virtual EMIL</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+        <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+        <!-- bower:css -->
+        <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+        <!-- endbower -->
+        <!-- endbuild -->
 
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automatically insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
-  </head>
-  <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+        <!-- build:css({.tmp/serve,src}) styles/app.css -->
+        <!-- inject:css -->
+        <!-- css files will be automatically insert here -->
+        <!-- endinject -->
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <div layout="vertical" layout-fill ng-controller="MainController as main">
-    
-      <md-content>
-        <header>
-          <acme-navbar creation-date="main.creationDate"></acme-navbar>
-        </header>
-    
-        <section class="jumbotron">
-          <h1>'Allo, 'Allo!</h1>
-          <p class="lead">
-            <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-            Always a pleasure scaffolding your apps.
-          </p>
-          <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</md-button>
-          <p>
-            With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
-          </p>
-        </section>
-    
-        <div class="techs" layout-align="center">
-          <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-            <md-card-content>
-              <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
-              <h3 class="md-title">{{ awesomeThing.title }}</h3>
-              <p>{{ awesomeThing.description }}</p>
-            </md-card-content>
-            <div class="md-action-buttons">
-              <md-button ng-href="{{ awesomeThing.url }}">Website</md-button>
-            </div>
-          </md-card>
+        <div layout="vertical" layout-fill ng-controller="MainController as main">
+            <md-content flex>
+                <header>
+                    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+                        <md-button class="md-raised md-accent" ng-click="newRound()">New Round</md-button>
+                        <md-button class="md-raised md-warn" ng-click="drawCard()" ng-disabled="noCardsLeft()">Draw Card</md-button>
+                    </md-toolbar>
+                </header>
+
+                <md-content>
+                    <md-list layout-align="center center">
+                        <md-list-item class="md-3-line">
+                            <div class="md-list-item-text" layout="column" layout-align="center center">
+                                <h3>EMIL plays the card</h3>
+                                <h4>{{ getLast().action }}</h4>
+                                <p>{{ getLast().cost }}</p>
+                            </div>
+                        </md-list-item>
+
+                        <md-divider></md-divider>
+
+                        <md-subheader>Previously played cards</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="item in getPlayedCards() track by item.id">
+                            <md-divider></md-divider>
+                            <md-icon class="md-avatar-icon"><i class="material-icons">keyboard_arrow_down</i></md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3> {{ item.action }} </h3>
+                                <p> {{ item.cost }} </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                <md-content>
+            </md-content>
         </div>
-      </md-content>
-    
-    </div>
-    
 
-    <!-- build:js(src) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- run `gulp inject` to automatically populate bower script dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+        <!-- build:js(src) scripts/vendor.js -->
+        <!-- bower:js -->
+        <!-- run `gulp inject` to automatically populate bower script dependencies -->
+        <!-- endbower -->
+        <!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
-    <!-- js files will be automatically insert here -->
-    <!-- endinject -->
+        <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+        <!-- inject:js -->
+        <!-- js files will be automatically insert here -->
+        <!-- endinject -->
 
-    <!-- inject:partials -->
-    <!-- angular templates will be automatically converted in js and inserted here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+        <!-- inject:partials -->
+        <!-- angular templates will be automatically converted in js and inserted here -->
+        <!-- endinject -->
+        <!-- endbuild -->
 
-  </body>
+    </body>
 </html>
