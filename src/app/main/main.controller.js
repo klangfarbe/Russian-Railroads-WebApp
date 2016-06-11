@@ -32,6 +32,8 @@
 
         var calculateDrawableCards = function() {
             drawableCards = lodash.filter(availableCards, function(card) {
+                if(vm.getWorkers() == 0)
+                    return false;
                 if(vm.getWorkers() - card.worker < 0)
                     return false;
                 if(lodash.includes(playedCards, card, 'id'))
@@ -83,8 +85,7 @@
         }
 
         vm.canDrawCards = function() {
-            return vm.nrCards() > 0 && vm.getWorkers() > 0
-                || vm.nrCards() === 1 && vm.getWorkers() === 0;
+            return vm.nrCards() > 0 && vm.getWorkers() > 0;
         }
 
         vm.nrCards = function() {
