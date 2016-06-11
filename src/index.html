@@ -77,15 +77,14 @@
                             </md-button>
                         </md-list-item>
 
-                        <md-list-item class="md-3-line">
+                        <md-list-item class="md-2-line" ng-if="emil.getLast()">
                             <div class="md-list-item-text" layout="column" layout-align="center center">
-                                <h3>Emil played the card</h3>
-                                <h4>{{emil.getLast().action }}</h4>
+                                <h3>{{emil.getLast().action }}</h3>
                                 <p>{{emil.getLast().cost }}</p>
                             </div>
                         </md-list-item>
 
-                        <md-list-item layout-align="center center">
+                        <md-list-item layout-align="center center" ng-if="emil.getLast()">
                             <md-button ng-click="emil.rejectCard()">
                                 <md-icon><i class="material-icons">clear</i></md-icon>
                             </md-button>

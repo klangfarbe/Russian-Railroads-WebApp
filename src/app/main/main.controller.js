@@ -125,8 +125,5 @@
             lodash.remove(occupiedCards, item, 'id');
             calculateDrawableCards();
         }
-
-        // calculateDrawableCards();
-        vm.newRound();
     }
 })();
