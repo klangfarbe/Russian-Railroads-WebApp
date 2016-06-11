@@ -86,7 +86,7 @@
                                 <md-icon><i class="material-icons">clear</i></md-icon>
                             </md-button>
 
-                            <md-button class="md-raised md-accent" ng-click="emil.drawCard()" ng-disabled="emil.noCardsLeft()">
+                            <md-button class="md-raised md-accent" ng-click="emil.drawCard()" ng-disabled="!emil.canDrawCards()">
                                 <md-icon><i class="material-icons">navigate_next</i></md-icon>
                             </md-button>
 

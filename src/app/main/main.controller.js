@@ -28,19 +28,28 @@
 
         var playedCards = [];
         var occupiedCards = [];
+        var drawableCards = [];
+
+        var calculateDrawableCards = function() {
+            drawableCards = lodash.filter(availableCards, function(card) {
+                if(vm.getWorkers() - card.worker < 0)
+                    return false;
+                if(lodash.includes(playedCards, card, 'id'))
+                    return false;
+                if(lodash.includes(occupiedCards, card, 'id'))
+                    return false;
+                return true;
+            });
+        }
 
         vm.baseWorkers = 6;
         vm.fabOpen = false;
 
         vm.drawCard = function() {
-            var length = playedCards.length;
-            do {
-                var card = lodash.sample(availableCards);
-                if(vm.getWorkers() - card.worker >= 0 && !lodash.includes(playedCards, card, 'id')) {
-                    playedCards.push(card);
-                }
-            }
-            while(playedCards.length <= availableCards.length && playedCards.length == length)
+            var card = lodash.sample(drawableCards);
+            if(card)
+                playedCards.push(card);
+                calculateDrawableCards();
         };
 
         vm.redrawCard = function() {
@@ -50,13 +59,18 @@
         }
 
         vm.rejectCard = function() {
-            occupiedCards.push(lodash.last(playedCards));
-            playedCards.length--;
+            if(playedCards.length > 0)
+                var card = lodash.last(playedCards);
+                if(card && !lodash.includes(occupiedCards, card, 'id')) {
+                    occupiedCards.push(card);
+                    vm.redrawCard();
+                }
         }
 
         vm.newRound = function() {
             playedCards.length = 0;
             occupiedCards.length = 0;
+            calculateDrawableCards();
             vm.drawCard();
         }
 
@@ -65,15 +79,16 @@
         }
 
         vm.getPlayedCards = function() {
-            return lodash.slice(playedCards, 0, playedCards.length-1).reverse();
+            return lodash.slice(playedCards, 0, playedCards.length - 1).reverse();
         }
 
-        vm.noCardsLeft = function() {
-            return playedCards.length === availableCards.length - occupiedCards.length || vm.getWorkers() === 0;
+        vm.canDrawCards = function() {
+            return vm.nrCards() > 0 && vm.getWorkers() > 0
+                || vm.nrCards() === 1 && vm.getWorkers() === 0;
         }
 
         vm.nrCards = function() {
-            return availableCards.length - playedCards.length - occupiedCards.length;
+            return drawableCards.length;
         }
 
         vm.getOccupiedCards = function() {
@@ -96,7 +111,6 @@
             }
         }
 
-        vm.drawCard();
-
+        vm.newRound();
     }
 })();
