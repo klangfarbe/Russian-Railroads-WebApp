@@ -32,9 +32,9 @@
 
         var calculateDrawableCards = function() {
             drawableCards = lodash.filter(availableCards, function(card) {
-                if(vm.getWorkers() == 0)
+                if(vm.getAvailableWorkers() == 0)
                     return false;
-                if(vm.getWorkers() - card.worker < 0)
+                if(vm.getAvailableWorkers() - card.worker < 0)
                     return false;
                 if(lodash.includes(playedCards, card, 'id'))
                     return false;
@@ -44,7 +44,7 @@
             });
         }
 
-        vm.baseWorkers = 6;
+        var workers = 6;
         vm.fabOpen = false;
 
         vm.drawCard = function() {
@@ -85,7 +85,7 @@
         }
 
         vm.canDrawCards = function() {
-            return vm.nrCards() > 0 && vm.getWorkers() > 0;
+            return vm.nrCards() > 0 && vm.getAvailableWorkers() > 0;
         }
 
         vm.nrCards = function() {
@@ -96,22 +96,37 @@
             return occupiedCards;
         }
 
-        vm.getWorkers = function() {
-            return vm.baseWorkers - lodash.sumBy(playedCards, 'worker');
+        vm.getAvailableWorkers = function() {
+            return workers - lodash.sumBy(playedCards, 'worker');
         }
 
         vm.getPoints = function() {
-            if(vm.baseWorkers == 8) {
+            if(workers == 8) {
                 return "150+";
             }
-            else if(vm.baseWorkers == 7) {
+            else if(workers == 7) {
                 return "50+";
             }
-            else if(vm.baseWorkers == 6) {
+            else if(workers == 6) {
                 return "< 50";
             }
         }
 
+        vm.setWorkers = function(v) {
+            workers = v;
+            calculateDrawableCards()
+        }
+
+        vm.getAllWorkers = function() {
+            return workers;
+        }
+
+        vm.removeCardFromPlayerStack = function(item) {
+            lodash.remove(occupiedCards, item, 'id');
+            calculateDrawableCards();
+        }
+
+        // calculateDrawableCards();
         vm.newRound();
     }
 })();

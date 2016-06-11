@@ -27,45 +27,42 @@
         <div layout="vertical" layout-fill ng-controller="MainController as emil">
             <md-content flex>
                 <header>
-                    <md-toolbar class="md-medium-tall" layout="row" layout-align="left center" layout-padding>
-                        <div flex="20">
+                    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+                        <div flex="25" layout="column" layout-align="center center">
                             <md-icon><i class="material-icons">content_copy</i></md-icon>
                             {{emil.nrCards()}}
                         </div>
 
-                        <div flex="25">
+                        <div flex="25" layout="column" layout-align="center center">
                             <md-icon><i class="material-icons">person</i></md-icon>
-                            {{emil.getWorkers()}} / {{emil.baseWorkers}}
+                            {{emil.getAvailableWorkers()}} / {{emil.getAllWorkers()}}
                         </div>
 
-                        <div flex="25">
+                        <div flex="25" layout="column" layout-align="center center">
                             <md-icon><i class="material-icons">star</i></md-icon>
                             {{emil.getPoints()}}
                         </div>
 
-                        <div flex></div>
+                        <div flex="25"></div>
                     </md-toolbar>
 
                     <md-fab-speed-dial md-open="emil.fabOpen" md-direction="down" class="md-scale md-fab-top-right">
                         <md-fab-trigger>
-                            <md-button class="md-fab">
-                                <md-icon><i class="material-icons">reorder</i></md-icon>
+                            <md-button class="md-fab md-warn">
+                                <md-icon><i class="material-icons">star</i></md-icon>
                             </md-button>
                         </md-fab-trigger>
                         <md-fab-actions>
-                            <md-button class="md-fab md-raised md-warn"  ng-click="emil.newRound()">
-                                <md-icon><i class="material-icons">refresh</i></md-icon>
-                            </md-button>
-                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 6">
+                            <md-button class="md-fab md-raised md-mini" ng-click="emil.setWorkers(6)">
                                 &lt; 50
                             </md-button>
                             </md-button>
-                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 7">
-                                &ge; 50
+                                <md-button class="md-fab md-raised md-mini" ng-click="emil.setWorkers(7)">
+                                50+
                             </md-button>
                             </md-button>
-                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 8">
-                                &ge; 150
+                                <md-button class="md-fab md-raised md-mini" ng-click="emil.setWorkers(8)">
+                                150+
                             </md-button>
                         </md-fab-actions>
                     </md-fab-speed-dial>
@@ -73,6 +70,13 @@
 
                 <md-content>
                     <md-list layout-align="center center">
+                        <md-list-item layout-align="center center" ng-if="emil.nrCards() === 0">
+                            <md-button flex class="md-block md-raised md-raised md-warn"  ng-click="emil.newRound()">
+                                <md-icon><i class="material-icons">refresh</i></md-icon>
+                                Start new round
+                            </md-button>
+                        </md-list-item>
+
                         <md-list-item class="md-3-line">
                             <div class="md-list-item-text" layout="column" layout-align="center center">
                                 <h3>Emil played the card</h3>
@@ -82,33 +86,35 @@
                         </md-list-item>
 
                         <md-list-item layout-align="center center">
-                            <md-button class="md-raised md-accent" ng-click="emil.rejectCard()">
+                            <md-button ng-click="emil.rejectCard()">
                                 <md-icon><i class="material-icons">clear</i></md-icon>
                             </md-button>
 
-                            <md-button class="md-raised md-accent" ng-click="emil.drawCard()" ng-disabled="!emil.canDrawCards()">
+                            <md-button ng-click="emil.drawCard()" ng-disabled="!emil.canDrawCards()">
                                 <md-icon><i class="material-icons">navigate_next</i></md-icon>
                             </md-button>
 
-                            <md-button class="md-raised md-warn" ng-click="emil.redrawCard()">
+                            <md-button ng-click="emil.redrawCard()">
                                 <md-icon><i class="material-icons">refresh</i></md-icon>
                             </md-button>
                         </md-list-item>
 
-                        <md-subheader>Player occupied fields</md-subheader>
+                        <md-subheader ng-if="emil.getOccupiedCards().length > 0">Actions used by player</md-subheader>
                         <md-list-item class="md-2-line" ng-repeat="item in emil.getOccupiedCards() track by item.id">
                             <md-divider></md-divider>
-                            <md-icon class="md-avatar-icon"><i class="material-icons">clear</i></md-icon>
+                            <md-icon class="md-avatar-icon" ng-click="emil.removeCardFromPlayerStack(item)">
+                                <i class="material-icons">clear</i>
+                            </md-icon>
                             <div class="md-list-item-text" layout="column">
                                 <h3> {{ item.action }} </h3>
-                                <p> {{ item.cost }} </p>
+                                <p> {{ item.cost }}</p>
                             </div>
                         </md-list-item>
 
-                        <md-subheader>Cards played by Emil</md-subheader>
+                        <md-subheader ng-if="emil.getPlayedCards().length > 0">Actions played by Emil</md-subheader>
                         <md-list-item class="md-2-line" ng-repeat="item in emil.getPlayedCards() track by item.id">
                             <md-divider></md-divider>
-                            <md-icon class="md-avatar-icon"><i class="material-icons">keyboard_arrow_down</i></md-icon>
+                            <md-icon class="md-avatar-icon"><i class="material-icons">navigate_next</i></md-icon>
                             <div class="md-list-item-text" layout="column">
                                 <h3> {{ item.action }} </h3>
                                 <p> {{ item.cost }} </p>
