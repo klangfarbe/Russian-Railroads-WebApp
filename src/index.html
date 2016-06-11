@@ -2,7 +2,7 @@
 <html ng-app="rrrEmil">
     <head>
         <meta charset="utf-8">
-        <title>Russian Railroads virtual EMIL</title>
+        <title>Virtual Emil for Russian Railroads</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -24,29 +24,89 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div layout="vertical" layout-fill ng-controller="MainController as main">
+        <div layout="vertical" layout-fill ng-controller="MainController as emil">
             <md-content flex>
                 <header>
-                    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
-                        <md-button class="md-raised md-accent" ng-click="newRound()">New Round</md-button>
-                        <md-button class="md-raised md-warn" ng-click="drawCard()" ng-disabled="noCardsLeft()">Draw Card</md-button>
+                    <md-toolbar class="md-medium-tall" layout="row" layout-align="left center" layout-padding>
+                        <div flex="20">
+                            <md-icon><i class="material-icons">content_copy</i></md-icon>
+                            {{emil.nrCards()}}
+                        </div>
+
+                        <div flex="25">
+                            <md-icon><i class="material-icons">person</i></md-icon>
+                            {{emil.getWorkers()}} / {{emil.baseWorkers}}
+                        </div>
+
+                        <div flex="25">
+                            <md-icon><i class="material-icons">star</i></md-icon>
+                            {{emil.getPoints()}}
+                        </div>
+
+                        <div flex></div>
                     </md-toolbar>
+
+                    <md-fab-speed-dial md-open="emil.fabOpen" md-direction="down" class="md-scale md-fab-top-right">
+                        <md-fab-trigger>
+                            <md-button class="md-fab">
+                                <md-icon><i class="material-icons">reorder</i></md-icon>
+                            </md-button>
+                        </md-fab-trigger>
+                        <md-fab-actions>
+                            <md-button class="md-fab md-raised md-warn"  ng-click="emil.newRound()">
+                                <md-icon><i class="material-icons">refresh</i></md-icon>
+                            </md-button>
+                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 6">
+                                &lt; 50
+                            </md-button>
+                            </md-button>
+                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 7">
+                                &ge; 50
+                            </md-button>
+                            </md-button>
+                                <md-button class="md-fab md-raised" ng-click="emil.baseWorkers = 8">
+                                &ge; 150
+                            </md-button>
+                        </md-fab-actions>
+                    </md-fab-speed-dial>
                 </header>
 
                 <md-content>
                     <md-list layout-align="center center">
                         <md-list-item class="md-3-line">
                             <div class="md-list-item-text" layout="column" layout-align="center center">
-                                <h3>EMIL plays the card</h3>
-                                <h4>{{ getLast().action }}</h4>
-                                <p>{{ getLast().cost }}</p>
+                                <h3>Emil played the card</h3>
+                                <h4>{{emil.getLast().action }}</h4>
+                                <p>{{emil.getLast().cost }}</p>
                             </div>
                         </md-list-item>
 
-                        <md-divider></md-divider>
+                        <md-list-item layout-align="center center">
+                            <md-button class="md-raised md-accent" ng-click="emil.rejectCard()">
+                                <md-icon><i class="material-icons">clear</i></md-icon>
+                            </md-button>
 
-                        <md-subheader>Previously played cards</md-subheader>
-                        <md-list-item class="md-2-line" ng-repeat="item in getPlayedCards() track by item.id">
+                            <md-button class="md-raised md-accent" ng-click="emil.drawCard()" ng-disabled="emil.noCardsLeft()">
+                                <md-icon><i class="material-icons">navigate_next</i></md-icon>
+                            </md-button>
+
+                            <md-button class="md-raised md-warn" ng-click="emil.redrawCard()">
+                                <md-icon><i class="material-icons">refresh</i></md-icon>
+                            </md-button>
+                        </md-list-item>
+
+                        <md-subheader>Player occupied fields</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="item in emil.getOccupiedCards() track by item.id">
+                            <md-divider></md-divider>
+                            <md-icon class="md-avatar-icon"><i class="material-icons">clear</i></md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3> {{ item.action }} </h3>
+                                <p> {{ item.cost }} </p>
+                            </div>
+                        </md-list-item>
+
+                        <md-subheader>Cards played by Emil</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="item in emil.getPlayedCards() track by item.id">
                             <md-divider></md-divider>
                             <md-icon class="md-avatar-icon"><i class="material-icons">keyboard_arrow_down</i></md-icon>
                             <div class="md-list-item-text" layout="column">

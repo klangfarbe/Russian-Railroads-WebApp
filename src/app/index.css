@@ -51,3 +51,8 @@ html {
   color: #000;
   padding: 0.2em 0;
 }
+
+md-fab-speed-dial.md-fab-top-right {
+  top: 10px;
+  right: 5px;
+}
