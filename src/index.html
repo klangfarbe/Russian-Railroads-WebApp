@@ -2,7 +2,7 @@
 <html ng-app="rrrEmil">
     <head>
         <meta charset="utf-8">
-        <title>Virtual Emil for Russian Railroads</title>
+        <title>{{'APP_HEADLINE' | translate}}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -72,14 +72,14 @@
                     <md-list layout-align="center center">
                         <md-list-item layout-align="center center" ng-if="emil.nrCards() === 0 || !emil.getLast()">
                             <md-button flex class="md-block md-raised md-raised md-warn"  ng-click="emil.newRound()">
-                                Start new round
+                                {{'NEW_ROUND' | translate}}
                             </md-button>
                         </md-list-item>
 
                         <md-list-item class="md-2-line" ng-if="emil.getLast()">
                             <div class="md-list-item-text" layout="column" layout-align="center center">
-                                <h3>{{emil.getLast().action }}</h3>
-                                <p>{{emil.getLast().cost }}</p>
+                                <h3>{{emil.getLast().action() | translate}}</h3>
+                                <p>{{emil.getLast().cost() | translate:emil.getLast() }}</p>
                             </div>
                         </md-list-item>
 
@@ -97,25 +97,25 @@
                             </md-button>
                         </md-list-item>
 
-                        <md-subheader ng-if="emil.getOccupiedCards().length > 0">Actions used by player</md-subheader>
+                        <md-subheader ng-if="emil.getOccupiedCards().length > 0">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
                         <md-list-item class="md-2-line" ng-repeat="item in emil.getOccupiedCards() track by item.id">
                             <md-divider></md-divider>
                             <md-icon class="md-avatar-icon" ng-click="emil.removeCardFromPlayerStack(item)">
                                 <i class="material-icons">clear</i>
                             </md-icon>
                             <div class="md-list-item-text" layout="column">
-                                <h3> {{ item.action }} </h3>
-                                <p> {{ item.cost }}</p>
+                                <h3> {{ item.action() | translate}} </h3>
+                                <p> {{ item.cost() | translate:item }}</p>
                             </div>
                         </md-list-item>
 
-                        <md-subheader ng-if="emil.getPlayedCards().length > 0">Actions played by Emil</md-subheader>
+                        <md-subheader ng-if="emil.getPlayedCards().length > 0">{{'EMIL_ACTIONS' | translate}}</md-subheader>
                         <md-list-item class="md-2-line" ng-repeat="item in emil.getPlayedCards() track by item.id">
                             <md-divider></md-divider>
                             <md-icon class="md-avatar-icon"><i class="material-icons">navigate_next</i></md-icon>
                             <div class="md-list-item-text" layout="column">
-                                <h3> {{ item.action }} </h3>
-                                <p> {{ item.cost }} </p>
+                                <h3> {{ item.action() | translate}} </h3>
+                                <p> {{ item.cost() | translate:item }} </p>
                             </div>
                         </md-list-item>
                     </md-list>
