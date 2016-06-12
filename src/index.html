@@ -70,7 +70,7 @@
 
                 <md-content>
                     <md-list layout-align="center center">
-                        <md-list-item layout-align="center center" ng-if="emil.nrCards() === 0">
+                        <md-list-item layout-align="center center" ng-if="emil.nrCards() === 0 || !emil.getLast()">
                             <md-button flex class="md-block md-raised md-raised md-warn"  ng-click="emil.newRound()">
                                 Start new round
                             </md-button>
