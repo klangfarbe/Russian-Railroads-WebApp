@@ -69,7 +69,7 @@
             EMIL_ACTIONS: 'Previous fields used by Emil',
             EMIL_LAST_ACTION: 'Emil will now block the field',
 
-            COAL_MODULE: 'Include the coal-module',
+            COAL_MODULE: 'Include coal-module',
 
             COSTS_COINS: '{{coins}} coin',
             COSTS_WORKER: '{{worker}} worker',
