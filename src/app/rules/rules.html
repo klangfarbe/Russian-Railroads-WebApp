@@ -1,4 +1,4 @@
-<md-toolbar class="md-medium-tall" layout-align="center">
+<md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
   <div class="md-toolbar-tools">
     <md-button ng-click="rules.home()">
         <md-icon ><i class="material-icons">reply</i></md-icon>
@@ -9,10 +9,10 @@
   </div>
 </md-toolbar>
 
-<md-content ng-if="rules.isGerman()" layout-padding>
+<md-content ng-if="rules.isGerman()" layout-padding layout="column" layout-fill>
     <h2>Spielaufbau</h2>
 </md-content>
 
-<md-content ng-if="!rules.isGerman()" layout-padding>
+<md-content ng-if="!rules.isGerman()" layout-padding layout="column" layout-fill>
     <h2>Game setup</h2>
 </md-content>

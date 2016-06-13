@@ -8,6 +8,7 @@
         var vm = this;
         vm.data = Game;
         vm.pointChange = false;
+        vm.fabOpen = false;
 
         vm.hasMoreRounds = function() {
             vm.points = {points: Game.getWorkers() == 6 ? 50 : 150};
