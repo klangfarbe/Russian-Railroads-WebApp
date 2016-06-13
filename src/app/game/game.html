@@ -23,7 +23,7 @@
 </header>
 
 <md-content layout="column" ng-if="game.isLastRound()">
-    <md-button class="md-warn md-raised" href="/#/">
+    <md-button class="md-warn md-raised" ng-click="game.home()">
         {{'END_GAME' | translate}}
     </md-button>
 </md-content>

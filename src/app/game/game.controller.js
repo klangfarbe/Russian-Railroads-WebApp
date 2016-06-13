@@ -4,7 +4,7 @@
     angular.module('rrrEmil').controller('GameController', GameController);
 
     /** @ngInject */
-    function GameController(lodash, Game) {
+    function GameController($location, lodash, Game) {
         var vm = this;
         vm.data = Game;
         vm.pointChange = false;
@@ -16,6 +16,10 @@
 
         vm.isLastRound = function() {
             return Game.nrCards() === 0 && Game.getRound() == Game.getRounds();
+        }
+
+        vm.home = function() {
+            $location.path('/');
         }
     }
 })();
