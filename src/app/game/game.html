@@ -1,0 +1,110 @@
+<header>
+    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+        <div flex="25" layout="column" layout-align="center center">
+            <md-icon><i class="material-icons">content_copy</i></md-icon>
+            {{game.data.nrCards()}}
+        </div>
+
+        <div flex="25" layout="column" layout-align="center center">
+            <md-icon><i class="material-icons">person</i></md-icon>
+            {{game.data.getAvailableWorkers()}} / {{game.data.getWorkers()}}
+        </div>
+
+        <div flex="25" layout="column" layout-align="center center">
+            <md-icon><i class="material-icons">star</i></md-icon>
+            {{game.data.getPoints()}}
+        </div>
+
+        <div flex="25" layout="column" layout-align="center center">
+            <md-icon><i class="material-icons">hourglass_empty</i></md-icon>
+            {{game.data.getRound()}} / {{game.data.getRounds()}}
+        </div>
+    </md-toolbar>
+</header>
+
+<md-content layout="column" ng-if="game.isLastRound()">
+    <md-button class="md-warn md-raised" href="/#/">
+        {{'END_GAME' | translate}}
+    </md-button>
+</md-content>
+
+<md-content layout="column" ng-if="game.hasMoreRounds()">
+    <div layout="row" layout-padding layout-align="center center">
+        <md-checkbox ng-model="game.pointChange" ng-if="game.data.getWorkers() < 8">
+            {{'POINTS' | translate:game.points}}
+        </md-checkbox>
+    </div>
+
+    <md-button class="md-raised md-warn" ng-click="game.data.newRound(game.pointChange); game.pointChange = false">
+        {{'NEW_ROUND' | translate}}
+    </md-button>
+</md-content>
+
+<md-content layout="column" >
+    <md-list>
+        <md-subheader ng-if="game.data.getLast()">{{'EMIL_LAST_ACTION' | translate}}</md-subheader>
+        <md-list-item class="md-2-line" ng-if="game.data.getLast()">
+            <div class="md-list-item-text" layout="column" layout-align="center center">
+                <h3>{{game.data.getLast().action() | translate}}</h3>
+                <p>{{game.data.getLast().cost() | translate:game.data.getLast() }}</p>
+            </div>
+        </md-list-item>
+
+        <md-list-item layout-align="center center" ng-if="game.data.getLast()">
+            <md-button ng-click="game.data.rejectCard()">
+                <md-icon><i class="material-icons">clear</i></md-icon>
+            </md-button>
+
+            <md-button ng-click="game.data.drawCard()" ng-disabled="!game.data.canDrawCards()">
+                <md-icon><i class="material-icons">navigate_next</i></md-icon>
+            </md-button>
+
+            <md-button ng-click="game.data.redrawCard()">
+                <md-icon><i class="material-icons">refresh</i></md-icon>
+            </md-button>
+        </md-list-item>
+
+        <md-subheader ng-if="game.data.getOccupiedCards().length > 0">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by item.id">
+            <md-divider></md-divider>
+            <md-icon class="md-avatar-icon" ng-click="game.data.removeCardFromPlayerStack(item)">
+                <i class="material-icons">clear</i>
+            </md-icon>
+            <div class="md-list-item-text" layout="column">
+                <h3> {{ item.action() | translate}} </h3>
+                <p> {{ item.cost() | translate:item }}</p>
+            </div>
+        </md-list-item>
+
+        <md-subheader ng-if="game.data.getPlayedCards().length > 0">{{'EMIL_ACTIONS' | translate}}</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by item.id">
+            <md-divider></md-divider>
+            <md-icon class="md-avatar-icon"><i class="material-icons">navigate_next</i></md-icon>
+            <div class="md-list-item-text" layout="column">
+                <h3> {{ item.action() | translate}} </h3>
+                <p> {{ item.cost() | translate:item }} </p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>
+
+<md-fab-speed-dial md-open="game.fabOpen" md-direction="up" class="md-scale md-fab-bottom-right">
+    <md-fab-trigger>
+        <md-button class="md-fab md-warn">
+            <md-icon><i class="material-icons">star</i></md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+        <md-button class="md-fab md-raised md-mini" ng-click="game.data.setWorker(6)">
+            &lt; 50
+        </md-button>
+        </md-button>
+            <md-button class="md-fab md-raised md-mini" ng-click="game.data.setWorker(7)">
+            50+
+        </md-button>
+        </md-button>
+            <md-button class="md-fab md-raised md-mini" ng-click="game.data.setWorker(8)">
+            150+
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>

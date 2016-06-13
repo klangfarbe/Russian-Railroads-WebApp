@@ -1,0 +1,23 @@
+<header>
+    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+        <div flex layout="column" layout-align="center center">
+            {{'APP_HEADLINE' | translate}}
+        </div>
+    </md-toolbar>
+</header>
+
+<md-content layout-padding layout="column" layout-align="center">
+    <md-button class="md-raised md-warn" ng-click="main.newGame()">
+        {{'NEW_GAME' | translate}}
+    </md-button>
+
+    <md-button class="md-raised md-warn" ng-click="main.showRules()">
+        {{'RULES' | translate}}
+    </md-button>
+
+    <div layout="row" layout-padding layout-align="center center">
+        <md-checkbox ng-model="main.includeCoalModule">
+            {{'COAL_MODULE' | translate}}
+        </md-checkbox>
+    </div>
+<md-content>
