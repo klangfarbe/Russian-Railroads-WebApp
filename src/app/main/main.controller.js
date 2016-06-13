@@ -16,5 +16,9 @@
         vm.switchLanguage = function(key) {
             $translate.use(key)
         }
+
+        vm.showRules = function() {
+            $location.path('/rules');
+        }
     }
 })();

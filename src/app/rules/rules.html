@@ -1,0 +1,18 @@
+<md-toolbar class="md-medium-tall" layout-align="center">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="rules.home()">
+        <md-icon ><i class="material-icons">reply</i></md-icon>
+    </md-button>
+    <span>
+    {{'RULES' | translate}}
+    </span>
+  </div>
+</md-toolbar>
+
+<md-content ng-if="rules.isGerman()" layout-padding>
+    <h2>Spielaufbau</h2>
+</md-content>
+
+<md-content ng-if="!rules.isGerman()" layout-padding>
+    <h2>Game setup</h2>
+</md-content>
