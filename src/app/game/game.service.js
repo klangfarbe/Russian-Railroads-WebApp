@@ -142,7 +142,6 @@
         }
 
         vm.setWorker = function(value) {
-            console.log(value);
             if(value >= 6 && value <= 8)
                 workers = value;
                 calculateDrawableCards();
