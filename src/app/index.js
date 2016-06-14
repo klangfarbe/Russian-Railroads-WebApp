@@ -28,7 +28,7 @@
             END_GAME: 'Spiel beendet',
             POINTS: 'Hast du mindestens {{points}} Punkte?',
             RULES: 'Regeln',
-            PLAYER_ACTIONS: 'Spieleraktionen',
+            PLAYER_ACTIONS: 'Vom Spieler besetzte Felder oder noch nicht nutzbare Aktionen',
             EMIL_ACTIONS: 'Von Emil besetzte Felder',
             EMIL_LAST_ACTION: 'Emil besetzt jetzt das Feld',
 

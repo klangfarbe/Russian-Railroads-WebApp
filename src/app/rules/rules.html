@@ -1,68 +1,66 @@
-<md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
-  <div class="md-toolbar-tools">
-    <md-button ng-click="rules.home()">
-        <md-icon ><i class="material-icons">reply</i></md-icon>
-    </md-button>
-    <span>
-    {{'RULES' | translate}}
-    </span>
-  </div>
-</md-toolbar>
+<md-content layout="column" layout-fill>
+    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+      <div class="md-toolbar-tools">
+        <md-button ng-click="rules.home()">
+            <md-icon ><i class="material-icons">reply</i></md-icon>
+        </md-button>
+        <span>
+        {{'RULES' | translate}}
+        </span>
+      </div>
+    </md-toolbar>
 
-<md-content ng-if="rules.isGerman()" layout-padding layout="column" layout-fill>
-    <md-content>
-        <md-button class="md-accent md-raised" href="http://www.hans-im-glueck.de/german-railroads/">Offizielle Regeln bei Hans im Glück</md-button>
+    <div layout-padding>
+        <md-content ng-if="rules.isGerman()" layout="column">
+            <h2>Spielaufbau</h2>
+            <ul>
+                <li>Der Aufbau ist wie im 2-Spieler-Spiel.</li>
+                 li>Das Aktionsfeld <em>2 x Geld</em> steht <strong>nicht</strong> zur Verfügung und wird abgedeckt.</li>
+                <li>Du nimmst dir <strong>5</strong> anstatt nur einer Münze.</li>
+                 li>Emil bekommt zunächst 6 Arbeiter. Zwei weitere stellst du auf das Feld 50 der Zählleiste.</li>
+            </ul>
+            <h2>Ablauf</h2>
+            Emil beginnt das Spiel und jede weitere Runde. Das Feld, welches von ihm
+            blockiert wird, wird oben angezeigt.
+            <ul>
+                <li>Sollte das Feld von dir noch nicht
+                benutzbar sein, so musst du mittels
+                <md-icon class="material-icons">refresh</md-icon> ein neues ziehen.</li>
+                <li>Ist das Feld von dir schon belegt, kannst du es mittels
+                 md-icon class="material-icons">clear</md-icon> aus dem Kartenstapel entfernen.</li>
+                <li>
+                Ansonsten stellst du die Anzahl der
+                benötigten Arbeiter auf das Feld und machst anschließend deinen Zug.
+                </li>
+            </ul>
+            <p>
+            Nachdem du deinen Zug beendet hast, ziehst du mittels
+            <md-icon class="material-icons">navigate_next</md-icon> eine neue Karte
+            für Emil.
+            </p>
+            Das Spiel endet nach 6 (bzw. 5 Runden falls das Kohle-Modul verwendet wird).
+            Die Anzahl der Arbeiter von Emil, die der Karten die er noch ziehen kann,
+            deine Siegpunkte und die Runden werden in der oberen Leiste angezeigt.
+            <h2>Hinweise</h2>
+            <ul>
+                <li>Emil benötigt kein Geld.</li>
+                <li>Sollte Emil nicht mehr genügend Arbeiter haben, so passt er.
+                In diesem Fall wird eine entsprechende Information engeblendet.</li>
+                 li>Erreichst du 50 bzw. 150 Punkte, so bekommt Emil jeweils einen Arbeiter
+                den er auch sofort einsetzen kann (sofern er noch nicht gepasst hat).
+                Am Ende von Emils Runde wirst du gefragt,
+                 b diese Bedingung erfüllt ist. Sollte dies während deines Zugs passieren, kannst
+                 u mittels <md-button class="md-fab md-warn md-mini"><md-icon class="material-icons">star</md-icon></md-button> deine Punktzahl auswählen.
+                </li>
+                <li>Emil sammelt Lokomotiven und Ingenieure. Die Ingenieure zählen
+                zum Spielende nur für die Mehrheitswertung.</li>
+            </ul>
+            <md-button class="md-accent md-raised" href="http://www.hans-im-glueck.de/german-railroads/">Offizielle Regeln bei Hans im Glück</md-button>
+        </md-content>
 
-        <h2>Spielaufbau</h2>
-        <ul>
-            <li>Der Aufbau ist wie im 2-Spieler-Spiel.</li>
-            <li>Das Aktionsfeld <em>2 x Geld</em> steht <strong>nicht</strong> zur Verfügung und wird abgedeckt.</li>
-            <li>Du nimmst dir <strong>5</strong> anstatt nur einer Münze.</li>
-            <li>Emil bekommt zunächst 6 Arbeiter. Zwei weitere stellst du auf das Feld 50 der Zählleiste.</li>
-        </ul>
-
-        <h2>Ablauf</h2>
-        Emil beginnt das Spiel und jede weitere Runde. Das Feld, welches von ihm
-        blockiert wird, wird oben angezeigt.
-        <ul>
-            <li>Sollte das Feld von dir noch nicht
-            benutzbar sein, so musst du mittels
-            <md-icon class="material-icons">refresh</md-icon> ein neues ziehen.</li>
-
-            <li>Ist das Feld von dir schon belegt, kannst du es mittels
-            <md-icon class="material-icons">clear</md-icon> aus dem Kartenstapel entfernen.</li>
-
-            <li>
-            Ansonsten stellst du die Anzahl der
-            benötigten Arbeiter auf das Feld und machst anschließend deinen Zug.
-            </li>
-        </ul>
-        <p>
-        Nachdem du deinen Zug beendet hast, ziehst du mittels
-        <md-icon class="material-icons">navigate_next</md-icon> eine neue Karte
-        für Emil.
-        </p>
-        Das Spiel endet nach 6 (bzw. 5 Runden falls das Kohle-Modul verwendet wird).
-        Die Anzahl der Arbeiter von Emil, die der Karten die er noch ziehen kann,
-        deine Siegpunkte und die Runden werden in der oberen Leiste angezeigt.
-
-        <h2>Hinweise</h2>
-        <ul>
-            <li>Emil benötigt kein Geld.</li>
-            <li>Sollte Emil nicht mehr genügend Arbeiter haben, so passt er.
-            In diesem Fall wird eine entsprechende Information engeblendet.</li>
-            <li>Erreichst du 50 bzw. 150 Punkte, so bekommt Emil jeweils einen Arbeiter
-            den er auch sofort einsetzen kann (sofern er noch nicht gepasst hat).
-            Am Ende von Emils Runde wirst du gefragt,
-            ob diese Bedingung erfüllt ist. Sollte dies während deines Zugs passieren, kannst
-            du mittels <md-button class="md-fab md-warn md-mini"><md-icon class="material-icons">star</md-icon></md-button> deine Punktzahl auswählen.
-            </li>
-            <li>Emil sammelt Lokomotiven und Ingenieure. Die Ingenieure zählen
-            zum Spielende nur für die Mehrheitswertung.</li>
-        </ul>
-    </md-content>
+        <md-content ng-if="!rules.isGerman()" layout-padding>
+            <h2>Game setup</h2>
+        </md-content>
+    </div>
 </md-content>
 
-<md-content ng-if="!rules.isGerman()" layout-padding layout="column" layout-fill>
-    <h2>Game setup</h2>
-</md-content>
