@@ -21,7 +21,7 @@
 
     .config(function($translateProvider) {
         $translateProvider.translations('de', {
-            APP_HEADLINE: 'Emil für Russian Railroads',
+            APP_HEADLINE: 'Solo-Variante - Emil will spielen',
             START_ROUND: 'Runde',
             NEW_ROUND: 'Nächste Runde',
             NEW_GAME: 'Neues Spiel',
@@ -59,7 +59,7 @@
         });
 
         $translateProvider.translations('en', {
-            APP_HEADLINE: 'Emil for Russian Railroads',
+            APP_HEADLINE: 'Solo-Variant - Emil wants to play',
             START_ROUND: 'Round',
             NEW_ROUND: 'Next round',
             NEW_GAME: 'New game',
