@@ -29,8 +29,9 @@
             POINTS: 'Hast du mindestens {{points}} Punkte?',
             RULES: 'Regeln',
             PLAYER_ACTIONS: 'Vom Spieler besetzte Felder oder noch nicht nutzbare Aktionen',
-            EMIL_ACTIONS: 'Von Emil besetzte Felder',
-            EMIL_LAST_ACTION: 'Emil besetzt jetzt das Feld',
+            EMIL_ACTIONS: 'Von Emil blockierte Felder',
+            EMIL_LAST_ACTION: 'Emil möchte das folgende Feld besetzen',
+            EMIL_PASSES: 'Emil hat gepasst',
 
             COAL_MODULE: 'Verwende das Kohle-Modul',
 
@@ -65,9 +66,10 @@
             END_GAME: 'Game finished',
             POINTS: 'Have you reached {{points}} points?',
             RULES: 'Rules',
-            PLAYER_ACTIONS: 'Actions used by player',
-            EMIL_ACTIONS: 'Previous fields used by Emil',
-            EMIL_LAST_ACTION: 'Emil will now block the field',
+            PLAYER_ACTIONS: 'Actions used by player or not available yet',
+            EMIL_ACTIONS: 'Fields blocked by Emil',
+            EMIL_LAST_ACTION: 'Emil wants to block the following field',
+            EMIL_PASSES: 'Emil has passed',
 
             COAL_MODULE: 'Include coal-module',
 

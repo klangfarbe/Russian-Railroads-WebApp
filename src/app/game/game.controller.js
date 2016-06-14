@@ -12,11 +12,7 @@
 
         vm.hasMoreRounds = function() {
             vm.points = {points: Game.getWorkers() == 6 ? 50 : 150};
-            return Game.nrCards() === 0 && Game.getRound() < Game.getRounds();
-        }
-
-        vm.isLastRound = function() {
-            return Game.nrCards() === 0 && Game.getRound() == Game.getRounds();
+            return Game.hasMoreRounds()
         }
 
         vm.home = function() {

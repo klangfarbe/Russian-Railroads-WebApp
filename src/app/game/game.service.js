@@ -6,6 +6,7 @@
     /** @ngInject */
     function Game(lodash) {
         var includeCoalModule = false;
+        var lastPlayedCard;
         var playedCards = [];
         var occupiedCards = [];
         var drawableCards = [];
@@ -33,11 +34,10 @@
 
         var calculateDrawableCards = function() {
             drawableCards = lodash.filter(availableCards, function(card) {
-                if(vm.getAvailableWorkers() == 0)
+                var availableWorkers = workers - lodash.sumBy(playedCards, 'worker');
+                if(availableWorkers == 0 || availableWorkers - card.worker < 0)
                     return false;
                 if(card.id == 16 && !includeCoalModule)
-                    return false;
-                if(vm.getAvailableWorkers() - card.worker < 0)
                     return false;
                 if(lodash.includes(playedCards, card, 'id'))
                     return false;
@@ -59,29 +59,23 @@
             occupiedCards.length = 0;
             drawableCards.length = 0;
             includeCoalModule = _includeCoalModule;
-            calculateDrawableCards();
             vm.drawCard();
         };
 
         vm.drawCard = function() {
-            var card = lodash.sample(drawableCards);
-            if(card)
-                playedCards.push(card);
-                calculateDrawableCards();
+            calculateDrawableCards();
+            lastPlayedCard = lodash.sample(drawableCards);
+            if(lastPlayedCard)
+                playedCards.push(lastPlayedCard);
         };
-
-        vm.redrawCard = function() {
-            if(playedCards.length > 0)
-                playedCards.length--;
-                vm.drawCard();
-        }
 
         vm.rejectCard = function() {
             if(playedCards.length > 0)
                 var card = lodash.last(playedCards);
                 if(card && !lodash.includes(occupiedCards, card, 'id')) {
                     occupiedCards.push(card);
-                    vm.redrawCard();
+                    playedCards.length--;
+                    vm.drawCard();
                 }
         }
 
@@ -91,16 +85,17 @@
             rounds--;
             playedCards.length = 0;
             occupiedCards.length = 0;
-            calculateDrawableCards();
             vm.drawCard();
         }
 
         vm.getLast = function() {
-            return lodash.last(playedCards);
+            return lastPlayedCard;
         }
 
         vm.getPlayedCards = function() {
-            return lodash.slice(playedCards, 0, playedCards.length - 1).reverse();
+            if(lastPlayedCard)
+                return lodash.slice(playedCards, 0, playedCards.length - 1).reverse();
+            return lodash.clone(playedCards).reverse();
         }
 
         vm.canDrawCards = function() {
@@ -112,11 +107,12 @@
         }
 
         vm.getOccupiedCards = function() {
-            return occupiedCards;
+            return lodash.clone(occupiedCards).reverse();
         }
 
         vm.getAvailableWorkers = function() {
-            return workers - lodash.sumBy(playedCards, 'worker');
+            return workers - lodash.sumBy(playedCards, 'worker')
+                + (lastPlayedCard ? lastPlayedCard.worker : 0);
         }
 
         vm.getPoints = function() {
@@ -155,9 +151,26 @@
             return includeCoalModule ? 5 : 6;
         }
 
-        vm.removeCardFromPlayerStack = function(item) {
+        vm.isLastRound = function() {
+            return vm.nrCards() === 0 && vm.getRound() == vm.getRounds();
+        }
+
+        vm.hasMoreRounds = function() {
+            return vm.nrCards() === 0 && vm.getRound() < vm.getRounds();
+        }
+
+        vm.removeFromOccupiedCards = function(item) {
             lodash.remove(occupiedCards, item, 'id');
             calculateDrawableCards();
+            if(!lastPlayedCard)
+                vm.drawCard();
+        }
+
+        vm.removeFromPlayedCards = function(item) {
+            lodash.remove(playedCards, item, 'id');
+            calculateDrawableCards();
+            if(!lastPlayedCard)
+                vm.drawCard();
         }
 
         // ---------------------------------------------------------------------

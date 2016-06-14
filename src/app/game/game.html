@@ -22,6 +22,7 @@
     </md-toolbar>
 
     <md-list>
+        <md-subheader class="md-no-sticky" ng-if="!game.data.getLast()">{{'EMIL_PASSES' | translate}}</md-subheader>
         <md-subheader class="md-no-sticky" ng-if="game.data.getLast()">{{'EMIL_LAST_ACTION' | translate}}</md-subheader>
         <md-list-item class="md-2-line" ng-if="game.data.getLast()">
             <div class="md-list-item-text" layout="column" layout-align="center center">
@@ -35,22 +36,18 @@
                 <md-icon class="material-icons">clear</md-icon>
             </md-button>
 
-            <md-button ng-click="game.data.drawCard()" ng-disabled="!game.data.canDrawCards()">
-                <md-icon class="material-icons">navigate_next</md-icon>
-            </md-button>
-
-            <md-button ng-click="game.data.redrawCard()">
-                <md-icon class="material-icons">refresh</md-icon>
+            <md-button ng-click="game.data.drawCard()">
+                <md-icon class="material-icons">check</md-icon>
             </md-button>
         </md-list-item>
 
-        <div layout="column" ng-if="game.isLastRound()">
+        <div layout="column" ng-if="game.data.isLastRound() && !game.data.getLast()">
             <md-button class="md-warn md-raised" ng-click="game.home()">
                 {{'END_GAME' | translate}}
             </md-button>
         </div>
 
-        <div layout="column" ng-if="game.hasMoreRounds()">
+        <div layout="column" ng-if="game.hasMoreRounds() && !game.data.getLast()">
             <div layout="row" layout-padding layout-align="center center">
                 <md-checkbox ng-model="game.pointChange" ng-if="game.data.getWorkers() < 8">
                     {{'POINTS' | translate:game.points}}
@@ -63,9 +60,9 @@
         </div>
 
         <md-subheader class="md-no-sticky" ng-if="game.data.getOccupiedCards().length > 0">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by item.id">
+        <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
             <md-divider></md-divider>
-            <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeCardFromPlayerStack(item)"> clear </md-icon>
+            <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromOccupiedCards(item)"> clear </md-icon>
             <div class="md-list-item-text" layout="column">
                 <h3> {{ item.action() | translate}} </h3>
                 <p> {{ item.cost() | translate:item }}</p>
@@ -73,9 +70,9 @@
         </md-list-item>
 
         <md-subheader class="md-no-sticky" ng-if="game.data.getPlayedCards().length > 0">{{'EMIL_ACTIONS' | translate}}</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by item.id">
+        <md-list-item class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by $index">
             <md-divider></md-divider>
-            <md-icon class="material-icons md-avatar-icon">navigate_next</md-icon>
+            <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromPlayedCards(item)"> check </md-icon>
             <div class="md-list-item-text" layout="column">
                 <h3> {{ item.action() | translate}} </h3>
                 <p> {{ item.cost() | translate:item }} </p>
@@ -85,7 +82,7 @@
 </md-content>
 
 <md-fab-speed-dial md-open="game.fabOpen" md-direction="up" class="md-fling md-fab-bottom-right"
-    ng-if="game.data.getWorkers() < 8 && game.data.canDrawCards()">
+    ng-if="game.data.getLast()">
     <md-fab-trigger>
         <md-button class="md-fab md-warn">
             <md-icon class="material-icons">star</md-icon>
