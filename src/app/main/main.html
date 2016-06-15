@@ -1,39 +1,31 @@
-<md-content layout="column" layout-fill layout-align="center">
-    <md-content layout="row" layout-align="center">
+<md-content layout="row" layout-fill layout-align="center start" layout-padding>
+    <div layout="column" layout-align="center center" flex flex-sm="60" flex-md="40" flex-lg="25">
         <h2>Russian Railroads</h2>
-    </md-content>
-    <md-content layout="row" layout-align="center">
         <h3>{{'APP_HEADLINE' | translate}}</h3>
-    </md-content>
 
-    <md-content layout="column">
-        <md-button class="md-raised md-warn" ng-click="main.newGame()">
+        <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.newGame()">
             {{'NEW_GAME' | translate}}
         </md-button>
 
-        <md-button class="md-raised md-warn" ng-click="main.showRules()">
+        <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.showRules()">
             {{'RULES' | translate}}
         </md-button>
 
-        <div layout="row" layout-padding layout-align="center center">
-            <md-checkbox ng-model="main.includeCoalModule">
-                {{'COAL_MODULE' | translate}}
-            </md-checkbox>
+        <md-checkbox ng-model="main.includeCoalModule">
+            {{'COAL_MODULE' | translate}}
+        </md-checkbox>
+
+        <div layout="row" layout-align="center">
+            <md-button ng-click="main.switchLanguage('de')">
+                <md-icon class="flag-icon flag-icon-de"></md-icon>
+            </md-button>
+            <md-button ng-click="main.switchLanguage('en')">
+                <md-icon class="flag-icon flag-icon-gb"></md-icon>
+            </md-button>
         </div>
-    </md-content>
 
-    <md-content layout="row" layout-align="center">
-        <md-button ng-click="main.switchLanguage('de')">
-            <md-icon class="flag-icon flag-icon-de"></md-icon>
-        </md-button>
-        <md-button ng-click="main.switchLanguage('en')">
-            <md-icon class="flag-icon flag-icon-gb"></md-icon>
-        </md-button>
-    </md-content>
-
-    <md-content layout="row" layout-align="center">
         <md-button href="https://github.com/klangfarbe/rrr">
              Code on github
         </md-button>
-    </md-content>
+    </div>
 </md-content>

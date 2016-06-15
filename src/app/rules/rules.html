@@ -1,73 +1,25 @@
-<md-content layout="column" layout-fill>
-    <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
-      <div class="md-toolbar-tools">
-        <md-button ng-click="rules.home()">
-            <md-icon ><i class="material-icons">reply</i></md-icon>
-        </md-button>
-        <span>
-        {{'RULES' | translate}}
-        </span>
-      </div>
-    </md-toolbar>
+<md-content layout="row" layout-fill layout-align="center start">
+    <div layout="column" layout-align="center" flex>
+        <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
+            <div class="md-toolbar-tools" flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" >
+                <md-button ng-click="rules.home()">
+                    <md-icon ><i class="material-icons">reply</i></md-icon>
+                </md-button>
+                <span> {{'RULES' | translate}} </span>
+            </div>
+        </md-toolbar>
 
-    <div layout-padding>
-        <md-content ng-if="rules.isGerman()" ayout="column">
-            <md-button layout="column" class="md-accent md-raised"
-                href="http://www.hans-im-glueck.de/fileadmin/data_archive/Regeln/GRR_Regeln_download.pdf">
-                Offizielle Regeln (PDF)
-            </md-button>
+        <div layout="row" layout-align="center" ng-if="rules.isGerman()">
+            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
+                <div ng-include="'/app/rules/rules_de.html'"></div>
+            </div>
+        </div>
 
-            <h2>Spielaufbau</h2>
-            <ul>
-                <li>Der Aufbau ist wie im 2-Spieler-Spiel.</li>
-                <li>Das Aktionsfeld <em>2 x Geld</em> steht <strong>nicht</strong> zur Verfügung und wird abgedeckt.</li>
-                <li>Du nimmst dir <strong>5</strong> anstatt nur einer Münze.</li>
-                <li>Emil bekommt zunächst 6 Arbeiter. Zwei weitere stellst du auf das Feld 50 der Zählleiste.</li>
-            </ul>
-            <h2>Ablauf</h2>
-            Emil beginnt das Spiel und jede weitere Runde. Das Feld, welches
-            von ihm blockiert werden möcht wird oben angezeigt. Ist das Feld
-            von dir schon belegt oder du kannst es noch nicht benutzen
-            (z.B. das weiße Gleis), musst du es mittels
-            <md-icon class="material-icons">clear</md-icon> aus dem
-            Kartenstapel entfernen. Ansonsten stellst du die Anzahl der
-            benötigten Arbeiter auf das Feld und machst anschließend deinen Zug.
-
-            <p>
-            Nachdem du deinen Zug beendet hast, ziehst du mittels
-            <md-icon class="material-icons">check</md-icon> eine neue Karte
-            für Emil.
-            </p>
-            Das Spiel endet nach 6 (bzw. 5 Runden falls das Kohle-Modul verwendet wird).
-            Die Anzahl der Arbeiter von Emil, die der Karten die er noch ziehen kann,
-            deine Siegpunkte und die Runden werden in der oberen Leiste angezeigt.
-
-            <h2>Hinweise</h2>
-            <ul>
-                <li>Emil benötigt kein Geld. Er nimmt dieses einfach aus dem Vorrat.</li>
-                <li>Sollte Emil nicht mehr genügend Arbeiter haben, so passt er.
-                In diesem Fall wird eine entsprechende Information engeblendet.</li>
-                <li>Erreichst du 50 bzw. 150 Punkte, so bekommt Emil jeweils einen Arbeiter
-                den er auch sofort einsetzen kann (sofern er noch nicht gepasst hat).
-                Am Ende von Emils Runde wirst du gefragt,
-                ob diese Bedingung erfüllt ist. Sollte dies während deines Zugs passieren, kannst
-                du mittels <md-button class="md-fab md-warn md-mini"><md-icon class="material-icons">star</md-icon></md-button> deine Punktzahl auswählen.
-                </li>
-                <li>Emil sammelt Lokomotiven und Ingenieure. Hierbei nimmt er
-                immer die Lok mit niedrigstem Wert. Sollte keine Lok mehr
-                ausliegen, nimmt er stattdessen die Fabrik mit der niedrigsten
-                Zahl.</li>
-                <li>Die von Emil gesammelten Ingenieure zählen zum Spielende
-                nur für die Mehrheitswertung.</li>
-            </ul>
-        </md-content>
-
-        <md-content ng-if="!rules.isGerman()" layout-padding>
-            <md-button layout="column" class="md-accent md-raised"
-                href="http://www.zmangames.com/uploads/4/7/1/7/47170931/russian_railroads.pdf">
-                Official Rules (PDF)
-            </md-button>
-        </md-content>
+        <div layout="row" layout-align="center" ng-if="!rules.isGerman()">
+            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
+                <div ng-include="'/app/rules/rules_en.html'"></div>
+            </div>
+        </div>
     </div>
 </md-content>
 
