@@ -26,6 +26,33 @@
 
         <div layout="row" layout-align="center">
             <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25">
+                <!-- <md-subheader class="md-no-sticky">{{'TRACKS_AVAILABLE' | translate}}</md-subheader> -->
+                <div layout-padding>
+                    <md-radio-group layout="row" layout-sm="column" ng-model="game.data.tracks">
+                        <md-radio-button value="black" aria-label="black track" class="md-primary">
+                            <md-icon md-svg-src="/assets/black.svg"></md-icon>
+                        </md-radio-button>
+                        <md-radio-button value="grey" aria-label="grey track" class="md-primary">
+                            <md-icon md-svg-src="/assets/grey.svg"></md-icon>
+                        </md-radio-button>
+                        <md-radio-button value="brown" aria-label="brown track" class="md-primary">
+                            <md-icon md-svg-src="/assets/brown.svg"></md-icon>
+                        </md-radio-button>
+                        <md-radio-button value="natural" aria-label="natural track" class="md-primary">
+                            <md-icon md-svg-src="/assets/natural.svg"></md-icon>
+                        </md-radio-button>
+                        <md-radio-button value="white" aria-label="white track" class="md-primary">
+                            <md-icon md-svg-src="/assets/white.svg"></md-icon>
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+        </div>
+
+        <md-divider></md-divider>
+
+        <md-content layout="row" layout-align="center">
+            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25">
                 <md-list>
                     <md-subheader class="md-no-sticky" ng-if="!game.data.getLast()">{{'EMIL_PASSES' | translate}}</md-subheader>
                     <md-subheader class="md-no-sticky" ng-if="game.data.getLast()">{{'EMIL_LAST_ACTION' | translate}}</md-subheader>
@@ -41,7 +68,7 @@
                             <md-icon class="material-icons">clear</md-icon>
                         </md-button>
 
-                        <md-button ng-click="game.data.drawCard()">
+                        <md-button ng-click="game.data.acceptCard()">
                             <md-icon class="material-icons">check</md-icon>
                         </md-button>
                     </md-list-item>
@@ -64,28 +91,31 @@
                         </md-button>
                     </div>
 
-                    <md-subheader class="md-no-sticky" ng-if="game.data.getOccupiedCards().length > 0">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
-                    <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
+                    <div ng-if="game.data.getOccupiedCards().length > 0 || game.data.getPlayedCards().length > 0">
                         <md-divider></md-divider>
-                        <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromOccupiedCards(item)"> clear </md-icon>
-                        <div class="md-list-item-text" layout="column">
-                            <h3> {{ item.action() | translate}} </h3>
-                            <p> {{ item.cost() | translate:item }}</p>
-                        </div>
-                    </md-list-item>
+                        <md-subheader class="md-no-sticky" ng-if="game.data.getOccupiedCards().length > 0">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
+                            <md-divider></md-divider>
+                            <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromOccupiedCards(item)"> clear </md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3> {{ item.action() | translate}} </h3>
+                                <p> {{ item.cost() | translate:item }}</p>
+                            </div>
+                        </md-list-item>
 
-                    <md-subheader class="md-no-sticky" ng-if="game.data.getPlayedCards().length > 0">{{'EMIL_ACTIONS' | translate}}</md-subheader>
-                    <md-list-item class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by $index">
-                        <md-divider></md-divider>
-                        <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromPlayedCards(item)"> check </md-icon>
-                        <div class="md-list-item-text" layout="column">
-                            <h3> {{ item.action() | translate}} </h3>
-                            <p> {{ item.cost() | translate:item }} </p>
-                        </div>
-                    </md-list-item>
+                        <md-subheader class="md-no-sticky" ng-if="game.data.getPlayedCards().length > 0">{{'EMIL_ACTIONS' | translate}}</md-subheader>
+                        <md-list-item class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by $index">
+                            <md-divider></md-divider>
+                            <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromPlayedCards(item)"> check </md-icon>
+                            <div class="md-list-item-text" layout="column">
+                                <h3> {{ item.action() | translate}} </h3>
+                                <p> {{ item.cost() | translate:item }} </p>
+                            </div>
+                        </md-list-item>
+                    </div>
                 </md-list>
             </div>
-        </div>
+        </md-content>
     </div>
 </md-content>
 

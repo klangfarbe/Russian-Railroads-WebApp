@@ -6,21 +6,21 @@
     /** @ngInject */
     function Game(lodash) {
         var includeCoalModule = false;
-        var lastPlayedCard;
+        var drawnCard;
         var playedCards = [];
         var occupiedCards = [];
         var drawableCards = [];
         var workers = 6;
         var rounds = 6;
         var availableCards = [
-            {id: 0, worker: 2, coins: 0},
-            {id: 1, worker: 2, coins: 0},
-            {id: 2, worker: 1, coins: 0},
-            {id: 3, worker: 2, coins: 0},
-            {id: 4, worker: 1, coins: 0},
-            {id: 5, worker: 2, coins: 0},
-            {id: 6, worker: 1, coins: 0},
-            {id: 7, worker: 2, coins: 0},
+            {id: 0, worker: 1, coins: 0}, // white
+            {id: 1, worker: 2, coins: 0}, // white
+            {id: 2, worker: 1, coins: 0}, // natural
+            {id: 3, worker: 2, coins: 0}, // natural
+            {id: 4, worker: 1, coins: 0}, // brown
+            {id: 5, worker: 2, coins: 0}, // brown
+            {id: 6, worker: 2, coins: 0}, // grey
+            {id: 7, worker: 2, coins: 0}, // black track
             {id: 8, worker: 1, coins: 1},
             {id: 9, worker: 1, coins: 0},
             {id: 10, worker: 3, coins: 0},
@@ -32,10 +32,25 @@
             {id: 16, worker: 1, coins: 0}
         ];
 
-        var calculateDrawableCards = function() {
+        // ---------------------------------------------------------------------
+        // Service functions
+        // ---------------------------------------------------------------------
+        var vm = {};
+
+        vm.tracks = 'black';
+
+        vm.calculateDrawableCards = function() {
             drawableCards = lodash.filter(availableCards, function(card) {
                 var availableWorkers = workers - lodash.sumBy(playedCards, 'worker');
                 if(availableWorkers == 0 || availableWorkers - card.worker < 0)
+                    return false;
+                if(vm.tracks == 'black' && card.id < 7)
+                    return false;
+                if(vm.tracks == 'grey' && card.id < 6)
+                    return false;
+                if(vm.tracks == 'brown' && card.id < 4)
+                    return false;
+                if(vm.tracks == 'natural' && card.id < 2)
                     return false;
                 if(card.id == 16 && !includeCoalModule)
                     return false;
@@ -47,11 +62,6 @@
             });
         }
 
-        // ---------------------------------------------------------------------
-        // Service functions
-        // ---------------------------------------------------------------------
-        var vm = {};
-
         vm.init = function(_includeCoalModule) {
             workers = 6;
             rounds = _includeCoalModule ? 5 : 6;
@@ -59,24 +69,25 @@
             occupiedCards.length = 0;
             drawableCards.length = 0;
             includeCoalModule = _includeCoalModule;
+            vm.tracks = 'black';
             vm.drawCard();
         };
 
         vm.drawCard = function() {
-            calculateDrawableCards();
-            lastPlayedCard = lodash.sample(drawableCards);
-            if(lastPlayedCard)
-                playedCards.push(lastPlayedCard);
+            vm.calculateDrawableCards();
+            drawnCard = lodash.sample(drawableCards);
         };
 
+        vm.acceptCard = function() {
+            if(drawnCard)
+                playedCards.push(drawnCard);
+                vm.drawCard();
+        }
+
         vm.rejectCard = function() {
-            if(playedCards.length > 0)
-                var card = lodash.last(playedCards);
-                if(card && !lodash.includes(occupiedCards, card, 'id')) {
-                    occupiedCards.push(card);
-                    playedCards.length--;
-                    vm.drawCard();
-                }
+            if(drawnCard)
+                occupiedCards.push(drawnCard);
+                vm.drawCard();
         }
 
         vm.newRound = function(increaseWorkers) {
@@ -89,12 +100,10 @@
         }
 
         vm.getLast = function() {
-            return lastPlayedCard;
+            return drawnCard;
         }
 
         vm.getPlayedCards = function() {
-            if(lastPlayedCard)
-                return lodash.slice(playedCards, 0, playedCards.length - 1).reverse();
             return lodash.clone(playedCards).reverse();
         }
 
@@ -111,8 +120,7 @@
         }
 
         vm.getAvailableWorkers = function() {
-            return workers - lodash.sumBy(playedCards, 'worker')
-                + (lastPlayedCard ? lastPlayedCard.worker : 0);
+            return workers - lodash.sumBy(playedCards, 'worker');
         }
 
         vm.getPoints = function() {
@@ -134,13 +142,13 @@
         vm.addWorker = function() {
             if(workers < 8)
                 workers++;
-                calculateDrawableCards();
+                vm.calculateDrawableCards();
         }
 
         vm.setWorker = function(value) {
             if(value >= 6 && value <= 8)
                 workers = value;
-                calculateDrawableCards();
+                vm.calculateDrawableCards();
         }
 
         vm.getRound = function() {
@@ -161,15 +169,15 @@
 
         vm.removeFromOccupiedCards = function(item) {
             lodash.remove(occupiedCards, item, 'id');
-            calculateDrawableCards();
-            if(!lastPlayedCard)
+            vm.calculateDrawableCards();
+            if(!drawnCard)
                 vm.drawCard();
         }
 
         vm.removeFromPlayedCards = function(item) {
             lodash.remove(playedCards, item, 'id');
-            calculateDrawableCards();
-            if(!lastPlayedCard)
+            vm.calculateDrawableCards();
+            if(!drawnCard)
                 vm.drawCard();
         }
 
