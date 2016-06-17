@@ -4,7 +4,7 @@
     angular.module('rrrEmil').controller('GameController', GameController);
 
     /** @ngInject */
-    function GameController($scope, $location, lodash, Game) {
+    function GameController($mdMedia, $scope, $location, lodash, Game) {
         var vm = this;
         vm.data = Game;
         vm.pointChange = false;
@@ -17,6 +17,10 @@
 
         vm.home = function() {
             $location.path('/');
+        }
+
+        vm.screenIsSmall = function() {
+            return $mdMedia('xs');
         }
 
         $scope.$watch(

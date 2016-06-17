@@ -95,9 +95,8 @@
             </div>
         </md-content>
 
-        <md-content layout-xs="column" layout-gt-xs="row" layout-align="center"
-                g-if="game.data.getOccupiedCards().length > 0 || game.data.getPlayedCards().length > 0">
-            <div flex-xs="100" flex-sm="50" flex-md="40" flex-lg="25">
+        <md-content layout="row" layout-align="center" ng-if="!game.screenIsSmall()">
+            <div flex-sm="50" flex-md="40" flex-lg="25">
                 <div flex>
                     <div layout="row" layout-align="center">
                     <md-list ng-if="game.data.getOccupiedCards().length > 0" flex>
@@ -115,7 +114,7 @@
                 </div>
             </div>
 
-            <div flex-xs="100" flex-sm="50" flex-md="40" flex-lg="25">
+            <div flex-sm="50" flex-md="40" flex-lg="25">
                 <div flex>
                     <div layout="row" layout-align="center">
                     <md-list ng-if="game.data.getPlayedCards().length > 0" flex>
@@ -132,6 +131,34 @@
                 </div>
                 </div>
             </div>
+        </md-content>
+
+        <md-content layout="row" layout-align="center" ng-if="game.screenIsSmall()">
+            <md-list flex>
+                <md-subheader ng-if="game.data.getOccupiedCards().length > 0"
+                    class="md-no-sticky">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
+                <md-list-item ng-if="game.data.getOccupiedCards().length > 0"
+                        class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
+                    <md-divider></md-divider>
+                    <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromOccupiedCards(item)"> clear </md-icon>
+                    <div class="md-list-item-text" layout="column">
+                        <h3> {{ item.action() | translate}} </h3>
+                        <p> {{ item.cost() | translate:item }}</p>
+                    </div>
+                </md-list-item>
+
+                <md-subheader ng-if="game.data.getPlayedCards().length > 0"
+                        class="md-no-sticky">{{'EMIL_ACTIONS' | translate}}</md-subheader>
+                <md-list-item ng-if="game.data.getPlayedCards().length > 0"
+                    class="md-2-line" ng-repeat="item in game.data.getPlayedCards() track by $index">
+                    <md-divider></md-divider>
+                    <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromPlayedCards(item)"> check </md-icon>
+                    <div class="md-list-item-text" layout="column">
+                        <h3> {{ item.action() | translate}} </h3>
+                        <p> {{ item.cost() | translate:item }} </p>
+                    </div>
+                </md-list-item>
+            </md-list>
         </md-content>
     </div>
 </md-content>
