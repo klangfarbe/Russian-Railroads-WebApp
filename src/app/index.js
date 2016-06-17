@@ -8,7 +8,7 @@
     })
 
     .config(function($logProvider) {
-        $logProvider.debugEnabled(true);
+        $logProvider.debugEnabled(false);
     })
 
     .config(function($mdThemingProvider) {
@@ -131,7 +131,16 @@
             });
     })
 
-    // .run(function runBlock($log) {
-    //     $log.debug('runBlock end');
-    // })
+    .config(function($mdIconProvider) {
+        $mdIconProvider
+            .icon('track:black', 'assets/black.svg')
+            .icon('track:brown', 'assets/brown.svg')
+            .icon('track:grey', 'assets/grey.svg')
+            .icon('track:natural', 'assets/natural.svg')
+            .icon('track:white', 'assets/white.svg');
+    })
+
+    .run(function runBlock($log) {
+        $log.debug('runBlock end');
+    })
 })();
