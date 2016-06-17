@@ -11,13 +11,13 @@
 
         <div layout="row" layout-align="center" ng-if="rules.isGerman()">
             <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
-                <div ng-include="'/app/rules/rules_de.html'"></div>
+                <rules-de></rules-de>
             </div>
         </div>
 
         <div layout="row" layout-align="center" ng-if="!rules.isGerman()">
             <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
-                <div ng-include="'/app/rules/rules_en.html'"></div>
+                <rules-en></rules-en>
             </div>
         </div>
     </div>
