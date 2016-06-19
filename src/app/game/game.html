@@ -1,7 +1,11 @@
 <md-content layout="row" layout-fill layout-align="center start">
     <div layout="column" layout-align="center" flex>
         <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
-            <div class="md-toolbar-tools" flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" >
+            <div class="md-toolbar-tools" flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
+                <div layout="column" layout-align="start center">
+                    <md-icon class="material-icons" ng-click="game.toggleSidebar()">reorder</md-icon>
+                </div>
+
                 <div flex layout="column" layout-align="center center">
                     <md-icon class="material-icons">content_copy</md-icon>
                     {{game.data.nrCards()}}
@@ -25,7 +29,7 @@
         </md-toolbar>
 
         <div layout="row" layout-align="center">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25">
+            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
                 <div layout-padding layout="row" layout-align="center">
                     <md-radio-group layout="row" layout-sm="column" ng-model="game.data.tracks">
                         <md-radio-button value="black" aria-label="black track" class="md-primary">
@@ -50,7 +54,7 @@
         </div>
 
         <md-content layout="row" layout-align="center">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25">
+            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
                 <md-list>
                     <md-list-item class="md-2-line" ng-if="!game.data.getLast()">
                         <div class="md-list-item-text" layout="column" layout-align="center center">
@@ -96,7 +100,7 @@
         </md-content>
 
         <md-content layout="row" layout-align="center" ng-if="!game.screenIsSmall()">
-            <div flex-sm="50" flex-md="40" flex-lg="25">
+            <div flex-sm="50" flex-md="40" flex-lg="25" flex-xl="20">
                 <div flex>
                     <div layout="row" layout-align="center">
                     <md-list ng-if="game.data.getOccupiedCards().length > 0" flex>
@@ -114,7 +118,7 @@
                 </div>
             </div>
 
-            <div flex-sm="50" flex-md="40" flex-lg="25">
+            <div flex-sm="50" flex-md="40" flex-lg="25" flex-xl="20">
                 <div flex>
                     <div layout="row" layout-align="center">
                     <md-list ng-if="game.data.getPlayedCards().length > 0" flex>

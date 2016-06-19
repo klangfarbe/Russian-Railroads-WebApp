@@ -105,7 +105,8 @@
             'de*': 'de'
         });
 
-        $translateProvider.determinePreferredLanguage();
+        $translateProvider.preferredLanguage('de');
+        // $translateProvider.determinePreferredLanguage();
         $translateProvider.useSanitizeValueStrategy('escape');
     })
 

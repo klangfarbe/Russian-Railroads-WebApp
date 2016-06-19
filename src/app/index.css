@@ -2,6 +2,8 @@
 
 html {
   font-family: 'Roboto Slab', serif;
+  /* Prevent text size change on orientation change. */
+  -webkit-text-size-adjust: 100%;
 }
 
 [layout=row] {
