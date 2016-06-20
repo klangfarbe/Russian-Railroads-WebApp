@@ -57,6 +57,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(cssFilter.restore)
     .pipe($.revReplace())
     .pipe(htmlFilter)
+    .pipe($.replace('<base href="/">', '<base href="' + conf.htmlbase + '">'))
     .pipe($.htmlmin({
       removeEmptyAttributes: true,
       removeAttributeQuotes: true,

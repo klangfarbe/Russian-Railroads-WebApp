@@ -110,6 +110,13 @@
         $translateProvider.useSanitizeValueStrategy('escape');
     })
 
+    .config(function($locationProvider) {
+         $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+    })
+
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {
