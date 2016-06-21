@@ -1,31 +1,41 @@
-<md-content layout="row" layout-fill layout-align="center start" layout-padding>
-    <div layout="column" layout-align="center center" flex flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-        <h2>Russian Railroads</h2>
-        <h3>{{'APP_HEADLINE' | translate}}</h3>
+<md-content layout="column" layout-fill>
+    <md-content layout="row" layout-padding layout-align="center">
+        <div layout="column" layout-align="center center">
+            <h2>Russian Railroads</h2>
+            <h3>{{'APP_HEADLINE' | translate}}</h3>
 
-        <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.newGame()">
-            {{'NEW_GAME' | translate}}
-        </md-button>
-
-        <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.showRules()">
-            {{'RULES' | translate}}
-        </md-button>
-
-        <md-checkbox ng-model="main.includeCoalModule">
-            {{'COAL_MODULE' | translate}}
-        </md-checkbox>
-
-        <div layout="row" layout-align="center">
-            <md-button ng-click="main.switchLanguage('de')">
-                <md-icon class="flag-icon flag-icon-de"></md-icon>
+            <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.newGame()">
+                {{'NEW_GAME' | translate}}
             </md-button>
-            <md-button ng-click="main.switchLanguage('en')">
-                <md-icon class="flag-icon flag-icon-gb"></md-icon>
+
+            <md-button style="width: 100%" class="md-raised md-warn" ng-click="main.showRules()">
+                {{'RULES' | translate}}
             </md-button>
+
+            <md-checkbox ng-model="main.includeCoalModule">
+                {{'COAL_MODULE' | translate}}
+            </md-checkbox>
         </div>
+    </md-content>
 
-        <md-button href="https://github.com/klangfarbe/rrr">
-             Code on github
+    <div layout="row" layout-align="center">
+        <md-button ng-click="main.switchLanguage('de')">
+            <md-icon class="flag-icon flag-icon-de"></md-icon>
+        </md-button>
+        <md-button ng-click="main.switchLanguage('en')">
+            <md-icon class="flag-icon flag-icon-gb"></md-icon>
         </md-button>
     </div>
+
+    <footer>
+        <div layout-gt-xs="row" layout-xs="column" layout-align="center center">
+            <md-button href="https://github.com/klangfarbe/rrr">
+                 <small>Code on github</small>
+            </md-button>
+
+            <md-button href="http://www.hans-im-glueck.de/">
+                <small>{{'PERMISSION' | translate}}</small>
+            </md-button>
+        </div>
+    </footer>
 </md-content>

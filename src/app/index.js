@@ -21,6 +21,7 @@
 
     .config(function($translateProvider) {
         $translateProvider.translations('de', {
+            PERMISSION: 'Mit Genehmigung vom Hans im Glück Verlag',
             APP_HEADLINE: 'Solo-Variante - Emil will spielen',
             START_ROUND: 'Runde',
             NEW_ROUND: 'Nächste Runde',
@@ -61,6 +62,7 @@
         });
 
         $translateProvider.translations('en', {
+            PERMISSION: 'With permission of Hans im Glück Verlag',
             APP_HEADLINE: 'Solo-Variant - Emil wants to play',
             START_ROUND: 'Round',
             NEW_ROUND: 'Next round',
