@@ -37,7 +37,14 @@
         // ---------------------------------------------------------------------
         var vm = {};
 
-        vm.tracks = 'black';
+        // The finite state machine. Possible states are:
+        // 1. 'round_start'
+        // 2. 'draw_card'
+        // 3. 'wait_for_player'
+        // 4. 'no_card_left'
+
+        vm.fsm;
+        vm.tracks;
 
         vm.calculateDrawableCards = function() {
             drawableCards = lodash.filter(availableCards, function(card) {
@@ -70,24 +77,37 @@
             drawableCards.length = 0;
             includeCoalModule = _includeCoalModule;
             vm.tracks = 'black';
-            vm.drawCard();
+            // vm.fsm = 'round_start';
+            vm.fsm = 'draw_card';
         };
 
         vm.drawCard = function() {
             vm.calculateDrawableCards();
             drawnCard = lodash.sample(drawableCards);
+            if(drawnCard) {
+                vm.fsm = 'draw_card';
+            } else {
+                vm.fsm = 'no_card_left';
+            }
         };
 
         vm.acceptCard = function() {
-            if(drawnCard)
+            if(drawnCard) {
                 playedCards.push(drawnCard);
-                vm.drawCard();
+                vm.calculateDrawableCards();
+                vm.fsm = 'wait_for_player';
+            }
         }
 
         vm.rejectCard = function() {
-            if(drawnCard)
+            if(drawnCard) {
                 occupiedCards.push(drawnCard);
                 vm.drawCard();
+            }
+        }
+
+        vm.playerTurnDone = function() {
+            vm.drawCard();
         }
 
         vm.newRound = function(increaseWorkers) {
@@ -137,12 +157,6 @@
 
         vm.getWorkers = function() {
             return workers;
-        }
-
-        vm.addWorker = function() {
-            if(workers < 8)
-                workers++;
-                vm.calculateDrawableCards();
         }
 
         vm.setWorker = function(value) {

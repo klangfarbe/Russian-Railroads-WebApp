@@ -28,6 +28,7 @@
             NEW_GAME: 'Neues Spiel',
             END_GAME: 'Spiel beendet',
             POINTS: 'Hast du mindestens {{points}} Punkte?',
+            PLAYER_POINTS: 'Meine Punkte',
             RULES: 'Regeln',
             BLOCKED_ACTIONS: 'Felder die Emil nicht belegen konnte',
             EMIL_ACTIONS: 'Von Emil belegte Felder',
@@ -36,8 +37,11 @@
             REJECT_ACTION: 'Nein',
             ACCEPT_ACTION: 'Ja',
 
+            PLAYER_TURN: 'Führe jetzt deinen Zug aus',
+            PLAYER_TURN_FINISH: 'Fertig!',
+
             COAL_MODULE: 'Verwende das Kohle-Modul',
-            TRACKS_AVAILABLE: 'Verfügbare Gleise',
+            TRACKS_AVAILABLE: 'Meine verfügbaren Gleise',
 
             COSTS_COINS: '{{coins}} Münze',
             COSTS_WORKER: '{{worker}} Arbeiter',
@@ -71,6 +75,7 @@
             NEW_GAME: 'New game',
             END_GAME: 'Game finished',
             POINTS: 'Have you reached {{points}} points?',
+            PLAYER_POINTS: 'My points',
             RULES: 'Rules',
             BLOCKED_ACTIONS: 'Actions Emil could not take',
             EMIL_ACTIONS: 'Actions Emil took',
@@ -79,8 +84,11 @@
             REJECT_ACTION: 'No',
             ACCEPT_ACTION: 'Yes',
 
+            PLAYER_TURN: 'Take your turn',
+            PLAYER_TURN_FINISH: 'Done!',
+
             COAL_MODULE: 'Include coal-module',
-            TRACKS_AVAILABLE: 'Usable tracks',
+            TRACKS_AVAILABLE: 'My usable tracks',
 
             COSTS_COINS: '{{coins}} coin',
             COSTS_WORKER: '{{worker}} worker',
