@@ -49,6 +49,7 @@
             </div>
         </div>
 
+        <!-- Game buttons and logic -->
         <md-content layout="row" layout-align="center">
             <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
                 <md-list>
@@ -82,7 +83,7 @@
                     </md-list-item>
 
                     <div layout="column" ng-if="game.data.isLastRound() && !game.data.getLast()">
-                        <md-button class="md-warn md-raised" ng-click="game.home()">
+                        <md-button class="md-warn md-raised" ng-click="main.home()">
                             {{'END_GAME' | translate}}
                         </md-button>
                     </div>
@@ -101,7 +102,8 @@
             </div>
         </md-content>
 
-        <md-content layout="row" layout-align="center" ng-if="!game.screenIsSmall()">
+        <!-- Action lists -->
+        <md-content layout="row" layout-align="center" ng-if="!main.screenIsSmall()">
             <div flex-sm="50" flex-md="40" flex-lg="25" flex-xl="20">
                 <div flex>
                     <div layout="row" layout-align="center">
@@ -139,7 +141,7 @@
             </div>
         </md-content>
 
-        <md-content layout="row" layout-align="center" ng-if="game.screenIsSmall()">
+        <md-content layout="row" layout-align="center" ng-if="main.screenIsSmall()">
             <md-list flex>
                 <md-subheader ng-if="game.data.getOccupiedCards().length > 0"
                     class="md-no-sticky">{{'BLOCKED_ACTIONS' | translate}}</md-subheader>

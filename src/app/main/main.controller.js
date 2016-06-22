@@ -4,10 +4,11 @@
     angular.module('rrrEmil').controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($location, $translate, Game) {
+    function MainController($mdMedia, $location, $translate, Game) {
         var vm = this;
 
         vm.includeCoalModule = false;
+
         vm.newGame = function() {
             Game.init(vm.includeCoalModule)
             $location.path('/game');
@@ -19,6 +20,14 @@
 
         vm.showRules = function() {
             $location.path('/rules');
+        }
+
+        vm.home = function() {
+            $location.path('/');
+        }
+
+        vm.screenIsSmall = function() {
+            return $mdMedia('xs');
         }
     }
 })();

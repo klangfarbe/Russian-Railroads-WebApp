@@ -4,7 +4,7 @@
     angular.module('rrrEmil').controller('GameController', GameController);
 
     /** @ngInject */
-    function GameController($mdMedia, $scope, $location, lodash, Game) {
+    function GameController($scope, $location, lodash, Game) {
         var vm = this;
         vm.data = Game;
         vm.pointChange = false;
@@ -15,14 +15,6 @@
             return Game.hasMoreRounds()
         }
 
-        vm.home = function() {
-            $location.path('/');
-        }
-
-        vm.screenIsSmall = function() {
-            return $mdMedia('xs');
-        }
-
         $scope.$watch(
             function() {
                 return Game.tracks;
@@ -31,6 +23,7 @@
                 Game.calculateDrawableCards()
                 if(!Game.getLast())
                     Game.drawCard();
-            })
+            }
+        );
     }
 })();
