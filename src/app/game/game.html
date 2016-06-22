@@ -65,13 +65,19 @@
                         </div>
                     </md-list-item>
 
+                    <md-list-item layout-align="center" ng-if="game.data.getLast()">
+                        <md-subheader class="md-no-sticky">{{'CAN_TAKE_ACTION' | translate}}</md-subheader>
+                    </md-list-item>
+
                     <md-list-item layout-align="center center" ng-if="game.data.getLast()">
                         <md-button ng-click="game.data.rejectCard()">
                             <md-icon class="material-icons">clear</md-icon>
+                            {{'REJECT_ACTION' | translate}}
                         </md-button>
 
                         <md-button ng-click="game.data.acceptCard()">
                             <md-icon class="material-icons">check</md-icon>
+                            {{'ACCEPT_ACTION' | translate}}
                         </md-button>
                     </md-list-item>
 
@@ -100,7 +106,7 @@
                 <div flex>
                     <div layout="row" layout-align="center">
                     <md-list ng-if="game.data.getOccupiedCards().length > 0" flex>
-                        <md-subheader class="md-no-sticky">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
+                        <md-subheader class="md-no-sticky">{{'BLOCKED_ACTIONS' | translate}}</md-subheader>
                         <md-list-item class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
                             <md-divider></md-divider>
                             <md-icon class="material-icons md-avatar-icon" ng-click="game.data.removeFromOccupiedCards(item)"> clear </md-icon>
@@ -136,7 +142,7 @@
         <md-content layout="row" layout-align="center" ng-if="game.screenIsSmall()">
             <md-list flex>
                 <md-subheader ng-if="game.data.getOccupiedCards().length > 0"
-                    class="md-no-sticky">{{'PLAYER_ACTIONS' | translate}}</md-subheader>
+                    class="md-no-sticky">{{'BLOCKED_ACTIONS' | translate}}</md-subheader>
                 <md-list-item ng-if="game.data.getOccupiedCards().length > 0"
                         class="md-2-line" ng-repeat="item in game.data.getOccupiedCards() track by $index">
                     <md-divider></md-divider>

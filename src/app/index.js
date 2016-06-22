@@ -29,10 +29,12 @@
             END_GAME: 'Spiel beendet',
             POINTS: 'Hast du mindestens {{points}} Punkte?',
             RULES: 'Regeln',
-            PLAYER_ACTIONS: 'Vom Spieler benutzte Felder',
-            EMIL_ACTIONS: 'Von Emil benutzte Felder',
-            EMIL_LAST_ACTION: 'Emil möchte das folgende Feld benutzen',
+            BLOCKED_ACTIONS: 'Felder die Emil nicht belegen konnte',
+            EMIL_ACTIONS: 'Von Emil belegte Felder',
             EMIL_PASSES: 'Emil hat gepasst',
+            CAN_TAKE_ACTION: 'Kann Emil die Aktion ausführen?',
+            REJECT_ACTION: 'Nein',
+            ACCEPT_ACTION: 'Ja',
 
             COAL_MODULE: 'Verwende das Kohle-Modul',
             TRACKS_AVAILABLE: 'Verfügbare Gleise',
@@ -70,10 +72,12 @@
             END_GAME: 'Game finished',
             POINTS: 'Have you reached {{points}} points?',
             RULES: 'Rules',
-            PLAYER_ACTIONS: 'Actions used by player',
-            EMIL_ACTIONS: 'Actions used by Emil',
-            EMIL_LAST_ACTION: 'Emil wants to use the following field',
+            BLOCKED_ACTIONS: 'Actions Emil could not take',
+            EMIL_ACTIONS: 'Actions Emil took',
             EMIL_PASSES: 'Emil has passed',
+            CAN_TAKE_ACTION: 'Can Emil take the action?',
+            REJECT_ACTION: 'No',
+            ACCEPT_ACTION: 'Yes',
 
             COAL_MODULE: 'Include coal-module',
             TRACKS_AVAILABLE: 'Usable tracks',
@@ -122,9 +126,7 @@
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'app/main/main.html',
-                controller: 'MainController',
-                controllerAs: 'main'
+                templateUrl: 'app/main/main.html'
             })
             .when('/game', {
                 templateUrl: 'app/game/game.html',
