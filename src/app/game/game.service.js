@@ -23,9 +23,9 @@
             {id: 7, worker: 2, coins: 0}, // black track
             {id: 8, worker: 1, coins: 1},
             {id: 9, worker: 1, coins: 0},
-            {id: 10, worker: 3, coins: 0},
-            {id: 11, worker: 1, coins: 0},
-            {id: 12, worker: 0, coins: 1},
+            {id: 10, worker: 3, coins: 0}, //
+            {id: 11, worker: 1, coins: 0}, // use engineer
+            {id: 12, worker: 0, coins: 1}, // buy engineer
             {id: 13, worker: 1, coins: 0},
             {id: 14, worker: 2, coins: 0},
             {id: 15, worker: 1, coins: 0},
@@ -38,10 +38,10 @@
         var vm = {};
 
         // The finite state machine. Possible states are:
-        // 1. 'round_start'
-        // 2. 'draw_card'
-        // 3. 'wait_for_player'
-        // 4. 'no_card_left'
+        // 1. 'round-start'
+        // 2. 'draw-card'
+        // 3. 'wait-for-player'
+        // 4. 'no-card-left'
 
         vm.fsm;
         vm.tracks;
@@ -77,17 +77,20 @@
             drawableCards.length = 0;
             includeCoalModule = _includeCoalModule;
             vm.tracks = 'black';
-            // vm.fsm = 'round_start';
-            vm.fsm = 'draw_card';
+            vm.fsm = 'game-start';
         };
+
+        vm.startGame = function() {
+            vm.fsm = 'round-start';
+        }
 
         vm.drawCard = function() {
             vm.calculateDrawableCards();
             drawnCard = lodash.sample(drawableCards);
             if(drawnCard) {
-                vm.fsm = 'draw_card';
+                vm.fsm = 'draw-card';
             } else {
-                vm.fsm = 'no_card_left';
+                vm.fsm = 'no-card-left';
             }
         };
 
@@ -95,7 +98,7 @@
             if(drawnCard) {
                 playedCards.push(drawnCard);
                 vm.calculateDrawableCards();
-                vm.fsm = 'wait_for_player';
+                vm.fsm = 'wait-for-player';
             }
         }
 
@@ -110,12 +113,14 @@
             vm.drawCard();
         }
 
-        vm.newRound = function(increaseWorkers) {
-            if(increaseWorkers && workers < 8)
-                workers++;
+        vm.newRound = function() {
             rounds--;
             playedCards.length = 0;
             occupiedCards.length = 0;
+            vm.fsm = 'round-start';
+        }
+
+        vm.startRound = function() {
             vm.drawCard();
         }
 
@@ -165,6 +170,15 @@
                 vm.calculateDrawableCards();
         }
 
+        vm.setEngineerCosts = function(worker, coins) {
+            var card = lodash.find(availableCards, {'id':11});
+            if(card) {
+                card.worker = worker;
+                card.coins = coins;
+                vm.calculateDrawableCards();
+            }
+        }
+
         vm.getRound = function() {
             return (includeCoalModule ? 5 : 6) -  rounds + 1;
         }
@@ -183,16 +197,12 @@
 
         vm.removeFromOccupiedCards = function(item) {
             lodash.remove(occupiedCards, item, 'id');
-            vm.calculateDrawableCards();
-            if(!drawnCard)
-                vm.drawCard();
+            vm.drawCard();
         }
 
         vm.removeFromPlayedCards = function(item) {
             lodash.remove(playedCards, item, 'id');
-            vm.calculateDrawableCards();
-            if(!drawnCard)
-                vm.drawCard();
+            vm.drawCard();
         }
 
         // ---------------------------------------------------------------------

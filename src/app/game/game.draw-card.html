@@ -1,0 +1,30 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row" layout-align="center">
+            <span class="md-headline">{{'CAN_TAKE_ACTION' | translate}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-divider></md-divider>
+
+    <md-card-content layout="row" layout-align="center">
+        <div layout="column" layout-align="center center">
+            {{game.data.getLast().action() | translate}}
+            <span class="md-subheader layout-margin">{{game.data.getLast().cost() | translate:game.data.getLast() }}</span>
+        </div>
+    </md-card-content>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="row" layout-align="center">
+        <md-button ng-click="game.data.rejectCard()">
+            <md-icon class="material-icons">clear</md-icon>
+            {{'REJECT_ACTION' | translate}}
+        </md-button>
+
+        <md-button ng-click="game.data.acceptCard()">
+            <md-icon class="material-icons">check</md-icon>
+            {{'ACCEPT_ACTION' | translate}}
+        </md-button>
+    </md-card-actions>
+</md-card>

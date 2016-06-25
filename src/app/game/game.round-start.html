@@ -1,0 +1,53 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row" layout-align="center">
+            <span class="md-headline">{{'ROUND' | translate}} {{game.data.getRound()}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-divider></md-divider>
+
+    <md-card-content layout="column">
+        <span class="md-subheader">{{'ENGINEER_COST' | translate}}</span>
+
+        <div layout="row" layout-align="center" layout-padding>
+            <md-radio-group layout="row" layout-sm="column" ng-model="game.engineer">
+                <md-radio-button value="1,0" aria-label="1 worker" class="md-primary">
+                    1 <md-icon class="material-icons">person</md-icon>
+                </md-radio-button>
+                <md-radio-button value="2,0" aria-label="2 workers" class="md-primary">
+                    2 <md-icon class="material-icons">person</md-icon>
+                </md-radio-button>
+                <md-radio-button value="0,1" aria-label="1 coin" class="md-primary">
+                    1 <md-icon class="material-icons">fiber_manual_record</md-icon>
+                </md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div ng-if="game.data.getRound() > 1">
+            <span class="md-subheader">{{'PLAYER_POINTS' | translate}}</span>
+
+            <div layout="row" layout-align="center" layout-padding>
+                <md-radio-group layout="row" ng-model="game.workers">
+                    <md-radio-button value="6" aria-label="less than 50 points" class="md-primary">
+                        &lt;50
+                    </md-radio-button>
+                    <md-radio-button value="7" aria-label="more than 50 points" class="md-primary">
+                        50+
+                    </md-radio-button>
+                    <md-radio-button value="8" aria-label="more than 150 points" class="md-primary">
+                        150+
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+    </md-card-content>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="row" layout-align="center">
+        <md-button lass="md-warn md-raised" ng-click="game.data.startRound()">
+            {{'START_ROUND' | translate}}
+        </md-button>
+    </md-card-actions>
+</md-card>

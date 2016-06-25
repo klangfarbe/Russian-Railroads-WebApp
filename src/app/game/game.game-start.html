@@ -1,0 +1,47 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row" layout-align="center">
+            <span class="md-headline">{{'GAME_START' | translate}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-divider></md-divider>
+
+    <md-card-content ng-if="main.isGerman()">
+        Baue das Spiel für 2 Spieler auf. Die Startbonus- und Reihenfolgekarten
+        sowie das Letztrundenplättchen werden nicht benötigt.
+        <ul>
+            <li>Nimm dir <strong>5</strong> anstatt nur einer Münze</li>
+            <li>Emil bekommt 6 Arbeiter</li>
+            <li>Stelle 2 weitere Arbeiter für Emil neben das Feld 50 der
+                Zählleiste</li>
+        </ul>
+        Das Aktionsfeld <em>2 x Geld</em> steht im Solo-Spiel
+        <strong>nicht</strong> zur Verfügung und wird abgedeckt.
+
+        <p>Und nun viel Spaß beim Spielen!</p>
+    </md-card-content>
+
+    <md-card-content ng-if="main.isEnglish()">
+        Set the game up for 2 players. The Turn Order and Starting Bonus cards
+        as well as the Last Round marker are not required.
+        <ul>
+            <li>Take <strong>5</strong> instead of just one coin</li>
+            <li>Give Emil a supply of 6 workers</li>
+            <li>Put 2 additional workers for Emil next to the 50 space of the
+                score track</li>
+        </ul>
+        The field <strong>Take 2 Coins</strong> is <strong>not</strong>
+        available in the solo game.
+
+        <p>Have fun playing the game!</p>
+    </md-card-content>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="row" layout-align="center">
+        <md-button ng-click="game.data.startGame()">
+            {{'CONTINUE' | translate}}
+        </md-button>
+    </md-card-actions>
+</md-card>

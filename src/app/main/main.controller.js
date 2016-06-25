@@ -29,5 +29,13 @@
         vm.screenIsSmall = function() {
             return $mdMedia('xs');
         }
+
+        vm.isGerman = function() {
+            return $translate.use() === 'de';
+        }
+
+        vm.isEnglish = function() {
+            return $translate.use() === 'en';
+        }
     }
 })();

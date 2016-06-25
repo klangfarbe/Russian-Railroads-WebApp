@@ -1,0 +1,57 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row" layout-align="center">
+            <span class="md-headline">{{'PLAYER_TURN' | translate}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-divider></md-divider>
+
+    <md-card-content layout="column">
+        <span class="md-subheader">{{'TRACKS_AVAILABLE' | translate}}</span>
+
+        <div layout="row" layout-align="center" layout-padding>
+            <md-radio-group layout="row" ng-model="game.data.tracks">
+                <md-radio-button value="black" aria-label="black track" class="md-primary">
+                    <md-icon md-svg-icon="track:black"></md-icon>
+                </md-radio-button>
+                <md-radio-button value="grey" aria-label="grey track" class="md-primary">
+                    <md-icon md-svg-icon="track:grey"></md-icon>
+                </md-radio-button>
+                <md-radio-button value="brown" aria-label="brown track" class="md-primary">
+                    <md-icon md-svg-icon="track:brown"></md-icon>
+                </md-radio-button>
+                <md-radio-button value="natural" aria-label="natural track" class="md-primary">
+                    <md-icon md-svg-icon="track:natural"></md-icon>
+                </md-radio-button>
+                <md-radio-button value="white" aria-label="white track" class="md-primary">
+                    <md-icon md-svg-icon="track:white"></md-icon>
+                </md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <span class="md-subheader">{{'PLAYER_POINTS' | translate}}</span>
+
+        <div layout="row" layout-align="center" layout-padding>
+            <md-radio-group layout="row" ng-model="game.workers">
+                <md-radio-button value="6" aria-label="less than 50 points" class="md-primary">
+                    &lt;50
+                </md-radio-button>
+                <md-radio-button value="7" aria-label="more than 50 points" class="md-primary">
+                    50+
+                </md-radio-button>
+                <md-radio-button value="8" aria-label="more than 150 points" class="md-primary">
+                    150+
+                </md-radio-button>
+            </md-radio-group>
+        </div>
+    </md-card-content>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="row" layout-align="center">
+        <md-button lass="md-warn md-raised" ng-click="game.data.playerTurnDone()">
+            {{'PLAYER_TURN_FINISH' | translate}}
+        </md-button>
+    </md-card-actions>
+</md-card>

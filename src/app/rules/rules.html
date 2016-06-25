@@ -1,23 +1,18 @@
 <md-content layout="row" layout-fill layout-align="center start">
     <div layout="column" layout-align="center" flex>
         <md-toolbar class="md-medium-tall" layout="row" layout-align="center center">
-            <div class="md-toolbar-tools" flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" >
-                <md-button ng-click="rules.home()">
+            <div class="md-toolbar-tools" flex-xs="100" flex-sm="80" flex-md="60" flex-lg="40" flex-xl="20">
+                <md-button ng-click="main.home()">
                     <md-icon class="material-icons">reply</md-icon>
                 </md-button>
                 <span> {{'RULES' | translate}} </span>
             </div>
         </md-toolbar>
 
-        <div layout="row" layout-align="center" ng-if="rules.isGerman()">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
-                <rules-de></rules-de>
-            </div>
-        </div>
-
-        <div layout="row" layout-align="center" ng-if="!rules.isGerman()">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" layout-padding>
-                <rules-en></rules-en>
+        <div layout="row" layout-align="center">
+            <div flex-xs="100" flex-sm="80" flex-md="60" flex-lg="40" flex-xl="20" layout-padding>
+                <rules-de ng-if="main.isGerman()"></rules-de>
+                <rules-en ng-if="main.isEnglish()"></rules-en>
             </div>
         </div>
     </div>

@@ -1,0 +1,19 @@
+<md-card>
+    <md-card-title>
+        <md-card-title-text layout="row" layout-align="center">
+            <span class="md-headline">{{'EMIL_PASSES' | translate}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-divider></md-divider>
+
+    <md-card-actions layout="column" layout-align="center">
+        <md-button class="md-warn md-raised" ng-click="main.home()" ng-if="game.data.isLastRound()">
+            {{'END_GAME' | translate}}
+        </md-button>
+
+        <md-button class="md-raised md-warn" ng-click="game.data.newRound()" ng-if="game.hasMoreRounds()">
+            {{'NEW_ROUND' | translate}}
+        </md-button>
+    </md-card-actions>
+</md-card>

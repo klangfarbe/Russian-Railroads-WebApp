@@ -25,131 +25,13 @@
         </md-toolbar>
 
         <!-- Game buttons and logic -->
-        <md-content layout="row" layout-align="center" ng-if="game.data.fsm === 'round_start'">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-                <md-list>
-                    <md-list-item class="md-2-line">
-                        <div class="md-list-item-text" layout="column" layout-align="center center">
-                            <h3>{{'ROUND_START' | translate}}</h3>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </div>
-        </md-content>
-
-        <md-content layout="row" layout-align="center" ng-if="game.data.fsm === 'draw_card'">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-                <md-list>
-                    <md-list-item class="md-2-line">
-                        <div class="md-list-item-text" layout="column" layout-align="center center">
-                            <h3>{{game.data.getLast().action() | translate}}</h3>
-                            <p>{{game.data.getLast().cost() | translate:game.data.getLast() }}</p>
-                        </div>
-                    </md-list-item>
-
-                    <md-list-item layout-align="center">
-                        <md-subheader class="md-no-sticky">{{'CAN_TAKE_ACTION' | translate}}</md-subheader>
-                    </md-list-item>
-
-                    <md-list-item layout-align="center center">
-                        <md-button ng-click="game.data.rejectCard()">
-                            <md-icon class="material-icons">clear</md-icon>
-                            {{'REJECT_ACTION' | translate}}
-                        </md-button>
-
-                        <md-button ng-click="game.data.acceptCard()">
-                            <md-icon class="material-icons">check</md-icon>
-                            {{'ACCEPT_ACTION' | translate}}
-                        </md-button>
-                    </md-list-item>
-                </md-list>
-            </div>
-        </md-content>
-
-        <md-content layout="row" layout-align="center"  ng-if="game.data.fsm === 'wait_for_player'">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-
-                <md-list-item class="md-2-line">
-                    <div class="md-list-item-text" layout="column" layout-align="center center">
-                        <h3>{{'PLAYER_TURN' | translate}}</h3>
-                    </div>
-                </md-list-item>
-
-                <md-subheader class="md-no-sticky">{{'TRACKS_AVAILABLE' | translate}}</md-subheader>
-
-                <div layout="row" layout-align="center">
-                    <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-                        <div layout="row" layout-align="center">
-                            <md-radio-group layout="row" layout-sm="column" ng-model="game.data.tracks">
-                                <md-radio-button value="black" aria-label="black track" class="md-primary">
-                                    <md-icon md-svg-icon="track:black"></md-icon>
-                                </md-radio-button>
-                                <md-radio-button value="grey" aria-label="grey track" class="md-primary">
-                                    <md-icon md-svg-icon="track:grey"></md-icon>
-                                </md-radio-button>
-                                <md-radio-button value="brown" aria-label="brown track" class="md-primary">
-                                    <md-icon md-svg-icon="track:brown"></md-icon>
-                                </md-radio-button>
-                                <md-radio-button value="natural" aria-label="natural track" class="md-primary">
-                                    <md-icon md-svg-icon="track:natural"></md-icon>
-                                </md-radio-button>
-                                <md-radio-button value="white" aria-label="white track" class="md-primary">
-                                    <md-icon md-svg-icon="track:white"></md-icon>
-                                </md-radio-button>
-                            </md-radio-group>
-                        </div>
-                    </div>
-                </div>
-
-                <md-subheader class="md-no-sticky">{{'PLAYER_POINTS' | translate}}</md-subheader>
-
-                <div layout="row" layout-align="center">
-                    <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-                        <div layout="row" layout-align="center">
-                            <md-radio-group layout="row" layout-sm="column" ng-model="game.workers">
-                                <md-radio-button value="6" aria-label="less than 50 points" class="md-primary">
-                                    &lt; 50
-                                </md-radio-button>
-                                <md-radio-button value="7" aria-label="more than 50 points" class="md-primary">
-                                    50+
-                                </md-radio-button>
-                                <md-radio-button value="8" aria-label="more than 150 points" class="md-primary">
-                                    150+
-                                </md-radio-button>
-                            </md-radio-group>
-                        </div>
-                    </div>
-                </div>
-
-                <div layout="column" layout-margin>
-                    <md-button class="md-warn md-raised" ng-click="game.data.playerTurnDone()">
-                        <!-- <md-icon class="material-icons">check</md-icon> -->
-                        {{'PLAYER_TURN_FINISH' | translate}}
-                    </md-button>
-                </div>
-            </div>
-
-        </md-content>
-
-
-        <md-content layout="row" layout-align="center" ng-if="game.data.fsm === 'no_card_left'">
-            <div flex-xs="100" flex-sm="60" flex-md="40" flex-lg="25" flex-xl="20">
-                <md-list>
-                    <md-list-item class="md-2-line">
-                        <div class="md-list-item-text" layout="column" layout-align="center center">
-                            <h3>{{'EMIL_PASSES' | translate}}</h3>
-                        </div>
-                    </md-list-item>
-                    <div layout="column">
-                        <md-button class="md-warn md-raised" ng-click="main.home()" ng-if="game.data.isLastRound()">
-                            {{'END_GAME' | translate}}
-                        </md-button>
-
-                        <md-button class="md-raised md-warn" ng-click="game.data.newRound()" ng-if="game.hasMoreRounds()">
-                            {{'NEW_ROUND' | translate}}
-                        </md-button>
-                    </div>
-                </md-list>
+        <md-content layout="row" layout-align="center">
+            <div flex-xs="100" flex-sm="80" flex-md="60" flex-lg="40" flex-xl="20">
+                <game-start ng-if="game.isState('game-start')"></game-start>
+                <round-start ng-if="game.isState('round-start')"></round-start>
+                <draw-card ng-if="game.isState('draw-card')"></draw-card>
+                <wait-for-player ng-if="game.isState('wait-for-player')"></wait-for-player>
+                <no-card-left ng-if="game.isState('no-card-left')"></no-card-left>
             </div>
         </md-content>
 
@@ -194,7 +76,7 @@
 
         <md-content layout="row" layout-align="center" ng-if="main.screenIsSmall()">
             <md-list flex>
-                    <md-divider></md-divider>
+                <md-divider></md-divider>
                 <md-subheader ng-if="game.data.getPlayedCards().length > 0"
                         class="md-no-sticky">{{'EMIL_ACTIONS' | translate}}</md-subheader>
                 <md-list-item ng-if="game.data.getPlayedCards().length > 0"
@@ -222,23 +104,3 @@
         </md-content>
     </div>
 </md-content>
-
-<!-- <md-fab-speed-dial ng-cloak md-open="game.fabOpen" md-direction="up" class="md-fling md-fab-bottom-right"
-    ng-if="game.data.getLast()">
-    <md-fab-trigger>
-        <md-button class="md-fab md-warn">
-            <md-icon class="material-icons">star</md-icon>
-        </md-button>
-    </md-fab-trigger>
-    <md-fab-actions>
-        <md-button class="md-fab md-mini" ng-click="game.data.setWorker(6)">
-            &lt; 50
-        </md-button>
-        <md-button class="md-fab md-mini" ng-click="game.data.setWorker(7)">
-            50+
-        </md-button>
-        <md-button class="md-fab md-mini" ng-click="game.data.setWorker(8)">
-            150+
-        </md-button>
-    </md-fab-actions>
-</md-fab-speed-dial> -->

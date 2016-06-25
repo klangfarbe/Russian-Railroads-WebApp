@@ -23,8 +23,11 @@
         $translateProvider.translations('de', {
             PERMISSION: 'Mit Genehmigung vom Hans im Glück Verlag',
             APP_HEADLINE: 'Solo-Variante - Emil will spielen',
-            START_ROUND: 'Runde',
+            GAME_START: 'Bevor du beginnst',
+            ROUND: 'Runde',
             NEW_ROUND: 'Nächste Runde',
+            START_ROUND: 'Start',
+            CONTINUE: 'Weiter',
             NEW_GAME: 'Neues Spiel',
             END_GAME: 'Spiel beendet',
             POINTS: 'Hast du mindestens {{points}} Punkte?',
@@ -33,9 +36,11 @@
             BLOCKED_ACTIONS: 'Felder die Emil nicht belegen konnte',
             EMIL_ACTIONS: 'Von Emil belegte Felder',
             EMIL_PASSES: 'Emil hat gepasst',
-            CAN_TAKE_ACTION: 'Kann Emil die Aktion ausführen?',
+            CAN_TAKE_ACTION: 'Kann Emil das Feld nutzen?',
             REJECT_ACTION: 'Nein',
             ACCEPT_ACTION: 'Ja',
+
+            ENGINEER_COST: 'Wähle die kosten des offenliegenden Ingenieurs',
 
             PLAYER_TURN: 'Führe jetzt deinen Zug aus',
             PLAYER_TURN_FINISH: 'Fertig!',
@@ -70,8 +75,11 @@
         $translateProvider.translations('en', {
             PERMISSION: 'With permission of Hans im Glück Verlag',
             APP_HEADLINE: 'Solo-Variant - Emil wants to play',
-            START_ROUND: 'Round',
+            GAME_START: 'Before you start',
+            ROUND: 'Round',
             NEW_ROUND: 'Next round',
+            START_ROUND: 'Start',
+            CONTINUE: 'Continue',
             NEW_GAME: 'New game',
             END_GAME: 'Game finished',
             POINTS: 'Have you reached {{points}} points?',
@@ -83,6 +91,8 @@
             CAN_TAKE_ACTION: 'Can Emil take the action?',
             REJECT_ACTION: 'No',
             ACCEPT_ACTION: 'Yes',
+
+            ENGINEER_COST: 'Set the costs of the usable engineer',
 
             PLAYER_TURN: 'Take your turn',
             PLAYER_TURN_FINISH: 'Done!',
@@ -119,8 +129,9 @@
             'de*': 'de'
         });
 
-        $translateProvider.preferredLanguage('de');
-        // $translateProvider.determinePreferredLanguage();
+        // $translateProvider.preferredLanguage('de');
+        // $translateProvider.preferredLanguage('en');
+        $translateProvider.determinePreferredLanguage();
         $translateProvider.useSanitizeValueStrategy('escape');
     })
 
