@@ -4,8 +4,7 @@
     angular.module('rrrEmil').controller('RulesController', RulesController);
 
     /** @ngInject */
-    function RulesController($location, $translate) {
-        var vm = this;
+    function RulesController() {
     }
 
     angular.module('rrrEmil').directive('rulesDe', function() {

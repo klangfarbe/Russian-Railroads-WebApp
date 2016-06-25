@@ -1,9 +1,40 @@
 (function() {
     'use strict';
 
-    var app = angular.module('rrrEmil');
+    angular.module('rrrEmil')
 
-    app.controller('GameController', GameController);
+    .controller('GameController', GameController)
+
+
+    .directive('gameStart', function() {
+        return {
+            templateUrl: 'app/game/game.game-start.html'
+        };
+    })
+
+    .directive('roundStart', function() {
+        return {
+            templateUrl: 'app/game/game.round-start.html'
+        };
+    })
+
+    .directive('drawCard', function() {
+        return {
+            templateUrl: 'app/game/game.draw-card.html'
+        };
+    })
+
+    .directive('waitForPlayer', function() {
+        return {
+            templateUrl: 'app/game/game.wait-for-player.html'
+        };
+    })
+
+    .directive('noCardLeft', function() {
+        return {
+            templateUrl: 'app/game/game.no-card-left.html'
+        };
+    });
 
     /** @ngInject */
     function GameController($scope, $location, lodash, Game) {
@@ -49,34 +80,4 @@
             }
         );
     }
-
-    app.directive('gameStart', function() {
-        return {
-            templateUrl: 'app/game/game.game-start.html'
-        };
-    })
-
-    app.directive('roundStart', function() {
-        return {
-            templateUrl: 'app/game/game.round-start.html'
-        };
-    })
-
-    app.directive('drawCard', function() {
-        return {
-            templateUrl: 'app/game/game.draw-card.html'
-        };
-    })
-
-    app.directive('waitForPlayer', function() {
-        return {
-            templateUrl: 'app/game/game.wait-for-player.html'
-        };
-    })
-
-    app.directive('noCardLeft', function() {
-        return {
-            templateUrl: 'app/game/game.no-card-left.html'
-        };
-    })
 })();
